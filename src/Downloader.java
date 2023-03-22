@@ -25,45 +25,35 @@ public class Downloader implements Runnable{
 
     public void run() {
         try {
-
-
-            // PARA A CITAÇÃO ENCONTRAR O PRIMEIRO <P>
-
-
-
             // Aceder ao url
             Document doc = Jsoup.connect(this.url).get();
             // Titulo
             String title = doc.title();
-            System.out.println(title);
             // Retirar as palavras
             StringTokenizer tokens = new StringTokenizer(doc.text());
-            int countTokens = 0;
             while (tokens.hasMoreElements()) {
+                // Remover numeros e outros caracteres
                 String newToken = tokens.nextToken().toLowerCase().replaceAll("[^a-z]", "");
-                if(newToken.length() != 0) {
+                // Se sobrar algo, adicionar palavra
+                if(newToken.length() != 0)
                     words.add(newToken);
-                    //System.out.println(words.get(countTokens));
-                    countTokens++;
-                }
             }
-
-            System.out.println(countTokens);
+            // Primeiro <p>
+            Elements paragraphs = doc.select("p:not(:has(#coordinates))");
+            String citation = paragraphs.first().text();
             // Retirar os links
             Elements links = doc.select("a[href]");
             for (Element link : links) {
+                // Adicionar link
                 urls.add(link.attr("abs:href"));
-                //System.out.println(link.text() + "\n" + link.attr("abs:href") + "\n");
             }
+
+            // TODO: Mandar para os barrels o search result e as palavras e links retirados (com multicast)
+            SearchResult sr = new SearchResult(url, title, citation);
+            System.out.println(sr);
+
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        for(String w : words){
-            System.out.println(w);
-        }
-        for(String u : urls){
-            //System.out.println(u);
         }
 
     }
