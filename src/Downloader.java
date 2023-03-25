@@ -74,7 +74,6 @@ public class Downloader implements Runnable{
 
                         // Adicionar os links retirados ao fim da queue
                         urlsQueue.addAll(urls);
-                        // TODO: Mandar para os barrels o search result e as palavras e links retirados (com multicast)
                         // MULTICAST
                         SearchResult sr = new SearchResult(url, title, citation, words, urls);
                         // Converter sr em bytes
@@ -89,22 +88,19 @@ public class Downloader implements Runnable{
                         DatagramPacket packet = new DatagramPacket(data, data.length, group, PORT);
                         socket.send(packet);
 
-
-
                         System.out.println(sr);
-                        //System.out.println("Total de palavras: " + words.size() + "\nTotal de links: " + urls.size());
 
 
                     } catch (HttpStatusException e) {
                         System.out.println("Couldn't access '" + e.getUrl() + "'");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.out.println("Error loading page");
                     }
                 }
 
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Socket Error");
         }
         finally {
             socket.close();
