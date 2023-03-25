@@ -3,7 +3,7 @@ import java.util.HashSet;
 
 public class SearchResult implements Serializable {
     public String url;
-    public int relevence;
+    public int relevance;
     public String title;
     public String citation;
     HashSet<String> words;
@@ -11,7 +11,7 @@ public class SearchResult implements Serializable {
 
     public SearchResult(String url, String title, String citation, HashSet<String> words, HashSet<String> urls) {
         this.url = url;
-        this.relevence = 1;
+        this.relevance = 1;
         this.title = title;
         this.citation = citation;
         this.words = words;
