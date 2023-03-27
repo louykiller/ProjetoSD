@@ -7,9 +7,17 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.net.MulticastSocket;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.io.IOException;
 
+public class IndexStorageBarrel extends Thread{
 
-public class IndexStorageBarrel {
+    private String MULTICAST_ADDRESS = "224.3.2.1";
+    private int PORT = 4321;
+    private long SLEEP_TIME = 15000;
+
     // Main class
     /**
      * @param nome_barrel nome do txt onde se vai estrair informação
@@ -23,7 +31,7 @@ public class IndexStorageBarrel {
         BufferedReader br1 = new BufferedReader(new FileReader(barrel_1));
         String st = "s";
         String [] st_aux;
-
+        
         while ((st = br1.readLine()) != null){
 			st_aux = st.split(",");
             urls.put(st_aux[0],st_aux[1]);
@@ -34,23 +42,15 @@ public class IndexStorageBarrel {
 
     /**
      * 
-     * @param barrel barrel atual
-     * @return barrel com o novo par palavra:url
+     * @param barrel barrel onde está guardada a informação 
+     * @param searchedWord palavra procurada 
+     * @param searchedUrl url procurado
+     * @return urls com o novo adicionado
      * @throws IOException
      */
-    public static HashMap<String,String> AddToHash(HashMap<String,String> barrel) throws IOException{
+    public static HashMap<String,String> AddToHash(HashMap<String,String> barrel,String searchedWord,String searchedUrl) throws IOException{
         HashMap<String,String> urls = new HashMap<String,String>();
         urls = barrel;
-
-        Scanner myObj = new Scanner(System.in);
-        System.out.println("Word searched: ");
-        String searchedWord = myObj.nextLine();
-        
-        System.out.println("Url searched: ");
-        String searchedUrl = myObj.nextLine();
-        
-        myObj.close();
-
         barrel.put(searchedWord, searchedUrl);
         return urls;
     }
@@ -82,30 +82,56 @@ public class IndexStorageBarrel {
         }
         */
 
-	public static void main(String[] args) throws Exception
-	{
-        HashMap<String,String> barrel1 = new HashMap<String,String>();
-        HashMap<String,String> barrel2 = new HashMap<String,String>();
-        
-        HashMap<String,String> barrel_merged = new HashMap<String,String>();
+    public IndexStorageBarrel() {
+        super("Server " + (long) (Math.random() * 1000));
+    }
+    public static void main(String[] args) {
+        IndexStorageBarrel server = new IndexStorageBarrel();
+        server.start();
+    }
 
-        barrel1 = GetInfoBarrel("a-m_barrel.txt");
-        barrel2 = GetInfoBarrel("n-z_barrel.txt");
+	public void run(){
+        MulticastSocket socket = null;
+        try{
+            socket = new MulticastSocket();  // create socket without binding it (only for sending)
+            HashMap<String,String> barrel = new HashMap<String,String>();
+            HashMap<String,String> barrel2 = new HashMap<String,String>();
+            
+            while(true){
+                barrel = GetInfoBarrel("a-m_barrel.txt");
+                barrel2 = GetInfoBarrel("n-z_barrel.txt");
+                barrel.putAll(barrel2);
 
+                InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
+                
+                String message = String.valueOf(barrel.size());
+                byte[] buffer = message.getBytes();
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, PORT);
+                socket.send(packet);
 
-        for (Map.Entry<String, String> set : barrel1.entrySet()) {
-            barrel_merged.put(set.getKey(),set.getValue());
+                for (Map.Entry<String, String> set : barrel.entrySet()) {
+                    message = set.getKey() + " " + set.getValue();
+                    buffer = message.getBytes();
+                    packet = new DatagramPacket(buffer, buffer.length, group, PORT);
+                    socket.send(packet);
+                }
+    
+                //barrel_merged = AddToHash(barrel_merged);
+                //System.out.println(barrel_merged);;
+
+                try { 
+                    sleep(SLEEP_TIME); 
+                } 
+                catch (InterruptedException e) { 
+
+                }
+            }
         }
-
-        for (Map.Entry<String, String> set : barrel2.entrySet()) {
-            barrel_merged.put(set.getKey(),set.getValue());
+        catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            socket.close();
         }
-
-        System.out.println(barrel_merged);
-
-        barrel_merged = AddToHash(barrel_merged);
-        
-        System.out.println(barrel_merged);;
     }
 
 }
