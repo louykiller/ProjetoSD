@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Updates">
+    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientActions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Downloader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Googol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Googol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/URLQueue.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/a-m_barrel.txt" beforeDir="false" afterPath="$PROJECT_DIR$/a-m_barrel.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/n-z_barrel.txt" beforeDir="false" afterPath="$PROJECT_DIR$/n-z_barrel.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +55,11 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\loure\OneDrive\Desktop\uni\SD\Projeto" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

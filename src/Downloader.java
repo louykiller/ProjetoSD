@@ -74,8 +74,9 @@ public class Downloader implements Runnable{
 
                         // Adicionar os links retirados ao fim da queue
                         urlsQueue.addAll(urls);
+
                         // MULTICAST
-                        SearchResult sr = new SearchResult(url, title, citation, words, urls);
+                        SearchResult sr = new SearchResult(url, title, citation);
                         // Converter sr em bytes
                         // sr é complexa (tipo SearchResult) logo não dá com byte[] buffer = sr.getBytes();
                         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -88,13 +89,27 @@ public class Downloader implements Runnable{
                         DatagramPacket packet = new DatagramPacket(data, data.length, group, PORT);
                         socket.send(packet);
 
-                        System.out.println(sr);
+                        /*
+                        String message = String.valueOf(barrel.size());
+                        byte[] buffer = message.getBytes();
+                        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, PORT);
+                        socket.send(packet);
+
+                        for (Map.Entry<String, String> set : barrel.entrySet()) {
+                            message = set.getKey() + " " + set.getValue();
+                            buffer = message.getBytes();
+                            packet = new DatagramPacket(buffer, buffer.length, group, PORT);
+                            socket.send(packet);
+                        }
+                        */
+                        //System.out.println(sr);
 
 
                     } catch (HttpStatusException e) {
                         System.out.println("Couldn't access '" + e.getUrl() + "'");
                     } catch (IOException e) {
                         System.out.println("Error loading page");
+                        e.printStackTrace();
                     }
                 }
 

@@ -3,14 +3,12 @@
 // enviados pelos Downloaders. Para tal, deverão aplicar um protocolo
 // de multicast fiável, uma vez que todos os storage barrels devem ter informação
 // idêntica ainda que possam existir avarias de omissão.
+
 import java.io.*;
-import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
-import java.net.MulticastSocket;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
-import java.io.IOException;
+import java.net.MulticastSocket;
+import java.util.HashMap;
 
 public class IndexStorageBarrel extends Thread{
 
@@ -24,7 +22,7 @@ public class IndexStorageBarrel extends Thread{
      * @return retorna o barrel com a informação do txt
      * @throws IOException
      */
-    public static HashMap<String,String> GetInfoBarrel(String nome_barrel) throws IOException{
+    public HashMap<String,String> GetInfoBarrel(String nome_barrel) throws IOException{
         HashMap<String,String> urls = new HashMap<String,String>();
 
         File barrel_1 = new File(nome_barrel);
@@ -48,7 +46,7 @@ public class IndexStorageBarrel extends Thread{
      * @return urls com o novo adicionado
      * @throws IOException
      */
-    public static HashMap<String,String> AddToHash(HashMap<String,String> barrel,String searchedWord,String searchedUrl) throws IOException{
+    public HashMap<String,String> AddToHash(HashMap<String,String> barrel,String searchedWord,String searchedUrl) throws IOException{
         HashMap<String,String> urls = new HashMap<String,String>();
         urls = barrel;
         barrel.put(searchedWord, searchedUrl);
@@ -85,46 +83,39 @@ public class IndexStorageBarrel extends Thread{
     public IndexStorageBarrel() {
         super("Server " + (long) (Math.random() * 1000));
     }
-    public static void main(String[] args) {
-        IndexStorageBarrel server = new IndexStorageBarrel();
-        server.start();
-    }
 
 	public void run(){
         MulticastSocket socket = null;
         try{
-            socket = new MulticastSocket();  // create socket without binding it (only for sending)
+            socket = new MulticastSocket();
+            InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
+            socket.joinGroup(group);
+
             HashMap<String,String> barrel = new HashMap<String,String>();
             HashMap<String,String> barrel2 = new HashMap<String,String>();
-            
+
+            // word -> url
+            barrel = GetInfoBarrel("a-m_barrel.txt");
+            barrel2 = GetInfoBarrel("n-z_barrel.txt");
+            barrel.putAll(barrel2);
+
             while(true){
-                barrel = GetInfoBarrel("a-m_barrel.txt");
-                barrel2 = GetInfoBarrel("n-z_barrel.txt");
-                barrel.putAll(barrel2);
+                byte[] buffer = new byte[1024];
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+                socket.receive(packet);
 
-                InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
-                
-                String message = String.valueOf(barrel.size());
-                byte[] buffer = message.getBytes();
-                DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, PORT);
-                socket.send(packet);
+                // SearchResult -> url, relevance, title, citation
+                // hashset words, hashset urls
 
-                for (Map.Entry<String, String> set : barrel.entrySet()) {
-                    message = set.getKey() + " " + set.getValue();
-                    buffer = message.getBytes();
-                    packet = new DatagramPacket(buffer, buffer.length, group, PORT);
-                    socket.send(packet);
-                }
-    
+                // Adicionar ao barrel
+
+
+
+
+                System.out.println(packet);
+
                 //barrel_merged = AddToHash(barrel_merged);
-                //System.out.println(barrel_merged);;
-
-                try { 
-                    sleep(SLEEP_TIME); 
-                } 
-                catch (InterruptedException e) { 
-
-                }
+                //System.out.println(barrel_merged);
             }
         }
         catch (IOException e) {

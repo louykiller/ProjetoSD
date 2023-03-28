@@ -25,6 +25,13 @@ public class Googol  {
             downloaders.get(i).start();
         }
 
+        System.out.println("A iniciar os barrels");
+        // Criar e inicar os barrels
+        ArrayList<Thread> barrels = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            barrels.add(new IndexStorageBarrel());
+            barrels.get(i).start();
+        }
 
         // Esperar que os downloaders acabem
         for (int i = 0; i < 3; i++) {

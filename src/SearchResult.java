@@ -1,21 +1,16 @@
 import java.io.Serializable;
-import java.util.HashSet;
 
 public class SearchResult implements Serializable {
     public String url;
     public int relevance;
     public String title;
     public String citation;
-    HashSet<String> words;
-    HashSet<String> urls;
 
-    public SearchResult(String url, String title, String citation, HashSet<String> words, HashSet<String> urls) {
+    public SearchResult(String url, String title, String citation) {
         this.url = url;
         this.relevance = 1;
         this.title = title;
         this.citation = citation;
-        this.words = words;
-        this.urls = urls;
     }
 
     public String toString(){
