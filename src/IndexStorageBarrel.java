@@ -8,7 +8,12 @@ import java.io.*;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.InputVerifier;
 
 public class IndexStorageBarrel extends Thread{
 
@@ -22,18 +27,27 @@ public class IndexStorageBarrel extends Thread{
      * @return retorna o barrel com a informação do txt
      * @throws IOException
      */
-    public HashMap<String,String> GetInfoBarrel(String nome_barrel) throws IOException{
-        HashMap<String,String> urls = new HashMap<String,String>();
+    public HashMap<String,ArrayList<String>> GetInfoBarrel(String nome_barrel) throws IOException{
+        HashMap<String,ArrayList<String>> urls = new HashMap<String,ArrayList<String>>();
 
+        ArrayList<String> list_aux;
+        
         File barrel_1 = new File(nome_barrel);
         BufferedReader br1 = new BufferedReader(new FileReader(barrel_1));
         String st = "s";
         String [] st_aux;
         
         while ((st = br1.readLine()) != null){
+            list_aux = new ArrayList<String>();
 			st_aux = st.split(",");
-            urls.put(st_aux[0],st_aux[1]);
+            
+            for(int i = 1 ; i<st_aux.length ; i++){
+                list_aux.add(st_aux[i]);
+            }
+
+            urls.put(st_aux[0],list_aux);
         }
+
         br1.close();
         return urls;
     }
@@ -80,6 +94,20 @@ public class IndexStorageBarrel extends Thread{
         }
         */
 
+    public HashMap<String,String> createInverted(HashMap<String,ArrayList<String>> urls){
+        HashMap<String,String> inverted = new HashMap<String,String>();
+        String url;
+
+        for (Entry<String, ArrayList<String>> set : urls.entrySet()) {
+            url = set.getKey();
+            for (String x : set.getValue()){
+                inverted.put(x,url);
+            }
+        }
+
+        return inverted;
+    }
+
     public IndexStorageBarrel() {
         super("Server " + (long) (Math.random() * 1000));
     }
@@ -91,15 +119,33 @@ public class IndexStorageBarrel extends Thread{
             InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
             socket.joinGroup(group);
 
-            HashMap<String,String> barrel = new HashMap<String,String>();
-            HashMap<String,String> barrel2 = new HashMap<String,String>();
+            HashMap<String,ArrayList<String>> barrel = new HashMap<String,ArrayList<String>>();
+            HashMap<String,ArrayList<String>> barrel2 = new HashMap<String,ArrayList<String>>();
+
+            HashMap<String,String> inverted = new HashMap<String,String>();
 
             // word -> url
             barrel = GetInfoBarrel("a-m_barrel.txt");
             barrel2 = GetInfoBarrel("n-z_barrel.txt");
             barrel.putAll(barrel2);
 
+            /*System.out.println("==== Info in the barrel =====");
+            for (Entry<String, ArrayList<String>> set : barrel.entrySet()) {
+                System.out.println("Url " + set.getKey() +" contem as seguintes palavras");
+                for (String x : set.getValue()){
+                    System.out.println(x);
+                }
+            }*/
+
+            inverted = createInverted(barrel);
+
+            /*for (Entry<String, String> set : inverted.entrySet()) {
+                System.out.println("Palavra " + set.getKey() + " associado ao seguinte url " + set.getValue());
+            }*/
+
             while(true){
+                
+                
                 byte[] buffer = new byte[1024];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
