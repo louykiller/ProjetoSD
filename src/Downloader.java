@@ -7,9 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
@@ -21,11 +19,13 @@ public class Downloader implements Runnable{
 
     private String MULTICAST_ADDRESS = "224.3.2.1";
     private int PORT = 4321;
+    private int id;
 
 
 
-    public Downloader(List<String> urlsQueue){
+    public Downloader(List<String> urlsQueue, int id){
         this.urlsQueue = urlsQueue;
+        this.id = id;
     }
 
     public void run() {
@@ -76,37 +76,41 @@ public class Downloader implements Runnable{
                         urlsQueue.addAll(urls);
 
                         // MULTICAST
-                        SearchResult sr = new SearchResult(url, title, citation);
-                        // Converter sr em bytes
-                        // sr é complexa (tipo SearchResult) logo não dá com byte[] buffer = sr.getBytes();
-                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                        ObjectOutputStream oos = new ObjectOutputStream(bos);
-                        oos.writeObject(sr);
-                        oos.flush();
-                        byte [] data = bos.toByteArray();
-                        // enviar os dados em multicast
                         InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
-                        DatagramPacket packet = new DatagramPacket(data, data.length, group, PORT);
+                        // header
+                        String header = "url;" + url + "|title;" + title + "|citation;" + citation;
+                        DatagramPacket packet = new DatagramPacket(header.getBytes(), header.getBytes().length, group, PORT);
                         socket.send(packet);
-
-                        /*
-                        String message = String.valueOf(barrel.size());
-                        byte[] buffer = message.getBytes();
-                        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, PORT);
-                        socket.send(packet);
-
-                        for (Map.Entry<String, String> set : barrel.entrySet()) {
-                            message = set.getKey() + " " + set.getValue();
-                            buffer = message.getBytes();
-                            packet = new DatagramPacket(buffer, buffer.length, group, PORT);
-                            socket.send(packet);
+                        // Words
+                        String wordsToSend = "";
+                        int counter = 0;
+                        for(String s : words){
+                            if(counter % 5 == 0){
+                                packet = new DatagramPacket(wordsToSend.getBytes(), wordsToSend.getBytes().length, group, PORT);
+                                socket.send(packet);
+                                wordsToSend = "";
+                            }
+                            wordsToSend += "word" + counter + ";" + s + "|";
+                            counter++;
                         }
-                        */
+                        // Links
+                        String linksToSend = "";
+                        counter = 0;
+                        for(String s : urls){
+                            if(counter % 5 == 0){
+                                packet = new DatagramPacket(linksToSend.getBytes(), linksToSend.getBytes().length, group, PORT);
+                                socket.send(packet);
+                                linksToSend = "";
+                            }
+                            linksToSend += "link" + counter + ";" + s + "|";
+                            counter++;
+                        }
                         //System.out.println(sr);
 
 
                     } catch (HttpStatusException e) {
                         System.out.println("Couldn't access '" + e.getUrl() + "'");
+                        e.printStackTrace();
                     } catch (IOException e) {
                         System.out.println("Error loading page");
                         e.printStackTrace();
@@ -116,6 +120,7 @@ public class Downloader implements Runnable{
             }
         } catch (IOException e) {
             System.out.println("Socket Error");
+            e.printStackTrace();
         }
         finally {
             socket.close();

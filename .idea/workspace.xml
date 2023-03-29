@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="">
+    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="After meeting">
+      <change afterPath="$PROJECT_DIR$/src/Search.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Downloader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Googol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Googol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MulticastClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MulticastClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RMIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMIClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RMISearchModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMISearchModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/URLQueue.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/a-m_barrel.txt" beforeDir="false" afterPath="$PROJECT_DIR$/a-m_barrel.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/n-z_barrel.txt" beforeDir="false" afterPath="$PROJECT_DIR$/n-z_barrel.txt" afterDir="false" />
     </list>
@@ -97,12 +101,20 @@
       <option name="project" value="LOCAL" />
       <updated>1679514145927</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="After meeting">
+      <created>1680041395077</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680041395077</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates" />
+    <MESSAGE value="After meeting" />
+    <option name="LAST_COMMIT_MESSAGE" value="After meeting" />
   </component>
 </project>

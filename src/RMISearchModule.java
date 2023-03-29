@@ -6,6 +6,7 @@
 //pesquisa, fazendo-se assim balanceamento de carga.
 
 import java.io.*;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -18,6 +19,7 @@ public class RMISearchModule extends UnicastRemoteObject implements ClientAction
     private final List<String> urlsQueue;
     private final ArrayList<User> users;
     private final File f = new File("users.txt");
+    private int barrel;
     public RMISearchModule(List<String> urlsQueue) throws RemoteException{
         super();
         this.urlsQueue = urlsQueue;
@@ -75,14 +77,20 @@ public class RMISearchModule extends UnicastRemoteObject implements ClientAction
     public ArrayList<SearchResult> search(String searchWords) throws RemoteException{
         // TODO: Get information from barrels
         System.out.println("Client searched for: " + searchWords);
-        return null;
+        try {
+            Search srch = (Search) LocateRegistry.getRegistry(8000).lookup("search");
+            return srch.search(searchWords);
+
+        } catch (NotBoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void run() {
         // Ligar o server
         try {
             Registry r = LocateRegistry.createRegistry(7000);
-            r.rebind("search", this);
+            r.rebind("server", this);
             System.out.println("Search Module Server ready");
         } catch (RemoteException re) {
             System.out.println("Exception in RMISearchModule: " + re);

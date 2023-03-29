@@ -7,9 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Googol  {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, RemoteException {
         // Criar uma lista sincronizada
         List<String> urlsQueue = Collections.synchronizedList(new LinkedList<String>());
+        urlsQueue.add("https://www.uc.pt");
         // Ligar o server
         try {
             RMISearchModule rsm = new RMISearchModule(urlsQueue);
@@ -21,7 +22,7 @@ public class Googol  {
         // Criar e iniciar as threads dos downloaders
         ArrayList<Thread> downloaders = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            downloaders.add(new Thread(new Downloader(urlsQueue)));
+            downloaders.add(new Thread(new Downloader(urlsQueue, i)));
             downloaders.get(i).start();
         }
 
@@ -29,7 +30,7 @@ public class Googol  {
         // Criar e inicar os barrels
         ArrayList<Thread> barrels = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            barrels.add(new IndexStorageBarrel());
+            barrels.add(new Thread(new IndexStorageBarrel(i)));
             barrels.get(i).start();
         }
 

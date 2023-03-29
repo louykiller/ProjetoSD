@@ -11,7 +11,7 @@ public class RMIClient {
     public static void main(String args[]) {
         user = null;
         try {
-            ClientActions ca = (ClientActions) LocateRegistry.getRegistry(7000).lookup("search");
+            ClientActions ca = (ClientActions) LocateRegistry.getRegistry(7000).lookup("server");
             Scanner sc = new Scanner(System.in);
             while (true){
                 System.out.println("_____________________________________________________________");

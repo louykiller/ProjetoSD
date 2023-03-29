@@ -4,22 +4,34 @@
 // de multicast fiável, uma vez que todos os storage barrels devem ter informação
 // idêntica ainda que possam existir avarias de omissão.
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.InputVerifier;
-
-public class IndexStorageBarrel extends Thread{
+public class IndexStorageBarrel extends UnicastRemoteObject implements Search, Runnable {
 
     private String MULTICAST_ADDRESS = "224.3.2.1";
     private int PORT = 4321;
     private long SLEEP_TIME = 15000;
+    private int id;
+
+    @Override
+    public ArrayList<SearchResult> search(String searchWords) throws RemoteException {
+        ArrayList<SearchResult> srs = new ArrayList<>();
+        srs.add(new SearchResult("The url" , "The title", "The citation", null, null));
+        return srs;
+    }
 
     // Main class
     /**
@@ -108,17 +120,20 @@ public class IndexStorageBarrel extends Thread{
         return inverted;
     }
 
-    public IndexStorageBarrel() {
-        super("Server " + (long) (Math.random() * 1000));
+    public IndexStorageBarrel(int id) throws RemoteException {
+        this.id = id;
     }
 
 	public void run(){
+        Registry r = null;
+        try {
+            r = LocateRegistry.createRegistry(8000 + id);
+            r.rebind("search", this);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
         MulticastSocket socket = null;
         try{
-            socket = new MulticastSocket();
-            InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
-            socket.joinGroup(group);
-
             HashMap<String,ArrayList<String>> barrel = new HashMap<String,ArrayList<String>>();
             HashMap<String,ArrayList<String>> barrel2 = new HashMap<String,ArrayList<String>>();
 
@@ -143,25 +158,61 @@ public class IndexStorageBarrel extends Thread{
                 System.out.println("Palavra " + set.getKey() + " associado ao seguinte url " + set.getValue());
             }*/
 
+            socket = new MulticastSocket(PORT);
+            InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
+            socket.joinGroup(group);
+
+            String url = "", title = "", citation = "";
+            ArrayList<String> words = new ArrayList<>();
+            ArrayList<String> urls = new ArrayList<>();
+
             while(true){
-                
-                
-                byte[] buffer = new byte[1024];
+                // Recieve packets
+                byte[] buffer = new byte[256];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
-
-                // SearchResult -> url, relevance, title, citation
-                // hashset words, hashset urls
-
-                // Adicionar ao barrel
-
-
-
-
-                System.out.println(packet);
-
-                //barrel_merged = AddToHash(barrel_merged);
-                //System.out.println(barrel_merged);
+                String p = new String(packet.getData(), 0, packet.getLength());
+                // Se o length for menor que 4, houve algum erro
+                if(p.length() < 4)
+                    continue;
+                String[] stuff = p.split("\\|");
+                // Verificar a primeira palavra (word ou link)
+                // Words
+                if(stuff[0].startsWith("word")){
+                    for(String s : stuff){
+                        String[] temp = s.split(";");
+                        if(temp.length > 1)
+                            words.add(temp[1]);
+                    }
+                }
+                // Links
+                else if (stuff[0].startsWith("link")){
+                    for(String s : stuff){
+                        String[] temp = s.split(";");
+                        if(temp.length > 1)
+                            urls.add(temp[1]);
+                    }
+                }
+                // Header
+                else if (stuff[0].startsWith("url")){
+                    if(!url.equals("")){
+                        // TODO: Adicionar ao barrel
+                        SearchResult sr = new SearchResult(url, title, citation, words, urls);
+                        System.out.println(sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
+                    }
+                    // url
+                    String[] temp = stuff[0].split(";");
+                    if(temp.length > 1)
+                        url = temp[1];
+                    // title
+                    temp = stuff[1].split(";");
+                    if(temp.length > 1)
+                        title = temp[1];
+                    // citation
+                    temp = stuff[2].split(";");
+                    if(temp.length > 1)
+                        citation = temp[1];
+                }
             }
         }
         catch (IOException e) {
@@ -170,5 +221,4 @@ public class IndexStorageBarrel extends Thread{
             socket.close();
         }
     }
-
 }
