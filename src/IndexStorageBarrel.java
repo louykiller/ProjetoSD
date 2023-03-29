@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.UnrecoverableKeyException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -124,6 +125,75 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         this.id = id;
     }
 
+    private ArrayList<HashMap<String, ArrayList<String>>> SplitBarrels(HashMap<String, ArrayList<String>> words_barrel,HashMap<String, ArrayList<String>> url_barrel) {
+        ArrayList<HashMap<String, ArrayList<String>>> out_list = new ArrayList<HashMap<String, ArrayList<String>>>();
+        String url;
+
+        HashMap<String,ArrayList<String>> words_a_m = new HashMap<String,ArrayList<String>>();
+        HashMap<String,ArrayList<String>> words_n_z = new HashMap<String,ArrayList<String>>();
+        HashMap<String,ArrayList<String>> url_a_m = new HashMap<String,ArrayList<String>>();
+        HashMap<String,ArrayList<String>> url_n_z = new HashMap<String,ArrayList<String>>();
+
+        ArrayList<String> word_aux; 
+        ArrayList<String> word_aux2;
+        ArrayList<String> url_aux; 
+        ArrayList<String> url_aux2;
+        
+        char firstChar,upperFirst;
+
+        for (Entry<String, ArrayList<String>> set : words_barrel.entrySet()) {
+            word_aux = new ArrayList<String>();
+            word_aux2 = new ArrayList<String>();
+
+            url = set.getKey();
+
+            for (String x : set.getValue()){
+                firstChar = x.charAt(0);
+                upperFirst = Character.toUpperCase(firstChar);
+        
+                if(Character.compare(upperFirst, 'M') < 0){
+                    word_aux.add(x);
+                }
+                else{
+                    word_aux2.add(x);
+                }
+    
+            }
+
+            words_a_m.put(url, word_aux);
+            words_n_z.put(url, word_aux2);
+        }
+
+        for (Entry<String, ArrayList<String>> set : url_barrel.entrySet()) {
+            url_aux = new ArrayList<String>();
+            url_aux2 = new ArrayList<String>();
+
+            url = set.getKey();
+
+            for (String x : set.getValue()){
+                firstChar = x.charAt(0);
+                upperFirst = Character.toUpperCase(firstChar);
+        
+                if(Character.compare(upperFirst, 'M') < 0){
+                    url_aux.add(x);
+                }
+                else{
+                    url_aux2.add(x);
+                }
+    
+            }
+
+            url_a_m.put(url, url_aux);
+            url_n_z.put(url, url_aux2);
+        }
+
+        out_list.add(words_a_m);
+        out_list.add(words_n_z);
+        out_list.add(url_a_m);
+        out_list.add(url_n_z);
+        return out_list;
+    }
+
 	public void run(){
         Registry r = null;
         try {
@@ -134,15 +204,29 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         }
         MulticastSocket socket = null;
         try{
-            HashMap<String,ArrayList<String>> barrel = new HashMap<String,ArrayList<String>>();
-            HashMap<String,ArrayList<String>> barrel2 = new HashMap<String,ArrayList<String>>();
 
-            HashMap<String,String> inverted = new HashMap<String,String>();
+            ArrayList<HashMap<String,ArrayList<String>>> spliter_helper = new ArrayList<HashMap<String,ArrayList<String>>>();
+            
+            HashMap<String,ArrayList<String>> words_barrel = new HashMap<String,ArrayList<String>>();
+            HashMap<String,ArrayList<String>> words_barrel_a_m = new HashMap<String,ArrayList<String>>();
+            HashMap<String,ArrayList<String>> words_barrel_n_z = new HashMap<String,ArrayList<String>>();
+            
+            HashMap<String,ArrayList<String>> url_barrel = new HashMap<String,ArrayList<String>>();
+            HashMap<String,ArrayList<String>> url_barrel_a_m = new HashMap<String,ArrayList<String>>();
+            HashMap<String,ArrayList<String>> url_barrel_n_z = new HashMap<String,ArrayList<String>>();
+
+            //HashMap<String,String> inverted = new HashMap<String,String>();
 
             // word -> url
-            barrel = GetInfoBarrel("a-m_barrel.txt");
-            barrel2 = GetInfoBarrel("n-z_barrel.txt");
-            barrel.putAll(barrel2);
+            words_barrel = GetInfoBarrel("a-m_barrel.txt");
+            url_barrel = GetInfoBarrel("n-z_barrel.txt");
+            
+            spliter_helper = SplitBarrels(words_barrel,url_barrel);
+            
+            words_barrel_a_m = spliter_helper.get(0);
+            words_barrel_n_z = spliter_helper.get(1);
+            url_barrel_a_m = spliter_helper.get(2);
+            url_barrel_n_z = spliter_helper.get(3);
 
             /*System.out.println("==== Info in the barrel =====");
             for (Entry<String, ArrayList<String>> set : barrel.entrySet()) {
@@ -152,7 +236,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                 }
             }*/
 
-            inverted = createInverted(barrel);
+            //inverted = createInverted(barrel);
 
             /*for (Entry<String, String> set : inverted.entrySet()) {
                 System.out.println("Palavra " + set.getKey() + " associado ao seguinte url " + set.getValue());
@@ -221,4 +305,5 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             socket.close();
         }
     }
+
 }
