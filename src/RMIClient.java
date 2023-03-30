@@ -2,16 +2,28 @@
 // Pretende-se que este cliente tenha uma UI bastante simples e que
 //se limite a invocar os métodos remotos no servidor RMI.
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class RMIClient {
+public class RMIClient extends UnicastRemoteObject implements ClientPrint {
     public static User user;
+    public RMIClient() throws RemoteException {
+        super();
+    }
+    public void print(String s) throws java.rmi.RemoteException{
+        System.out.println(s);
+    }
     public static void main(String args[]) {
         user = null;
         try {
-            ClientActions ca = (ClientActions) LocateRegistry.getRegistry(7000).lookup("server");
+            Registry r = LocateRegistry.createRegistry(7001);
+            r.rebind("client", new RMIClient());
+
+            ServerActions ca = (ServerActions) LocateRegistry.getRegistry(7000).lookup("server");
             Scanner sc = new Scanner(System.in);
             while (true){
                 System.out.println("_____________________________________________________________");
@@ -24,6 +36,7 @@ public class RMIClient {
                 }
                 else
                     System.out.println("| 3 - Log Out                                               |");
+                System.out.println("| 9 - Informações gerais sobre o sistema                    |");
                 System.out.println("| 0 - Exit                                                  |");
                 System.out.println("_____________________________________________________________");
 
@@ -91,6 +104,10 @@ public class RMIClient {
                             } else {
                                 System.out.println("Couldn't register. Please try again with other credentials.");
                             }
+                        }
+                        // Informações de sistema
+                        case 9 -> {
+                            ca.printSystemDetails();
                         }
                         default -> System.out.println("Invalid input please try again!");
                     }

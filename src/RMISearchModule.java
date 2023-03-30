@@ -12,10 +12,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class RMISearchModule extends UnicastRemoteObject implements ClientActions, Runnable {
+public class RMISearchModule extends UnicastRemoteObject implements ServerActions, Runnable {
     private final List<String> urlsQueue;
     private final ArrayList<User> users;
     private final File f = new File("users.txt");
@@ -76,14 +77,42 @@ public class RMISearchModule extends UnicastRemoteObject implements ClientAction
     }
     public ArrayList<SearchResult> search(String searchWords) throws RemoteException{
         // TODO: Get information from barrels
-        System.out.println("Client searched for: " + searchWords);
         try {
             Search srch = (Search) LocateRegistry.getRegistry(8000).lookup("search");
             return srch.search(searchWords);
-
         } catch (NotBoundException e) {
             throw new RuntimeException(e);
         }
+    }
+    public HashMap<String, SystemElements> elements = new HashMap<>();
+    public ArrayList<String> topSearches = new ArrayList<>();
+
+    public void updateDownloaderStatus(boolean active, int id, int port) throws java.rmi.RemoteException {
+        elements.put("D" + id, new DownloaderElement(id, port, active));
+    }
+    public void updateBarrelStatus(boolean active, int id, int port) throws java.rmi.RemoteException {
+        elements.put("B" + id, new BarrelElement(id, port, active));
+    }
+    public void updateTopSearches(ArrayList<String> topSearches) throws java.rmi.RemoteException {
+        this.topSearches = topSearches;
+    }
+
+    public void printSystemDetails() throws java.rmi.RemoteException{
+        try {
+            ClientPrint cp = (ClientPrint) LocateRegistry.getRegistry(7001).lookup("client");
+            cp.print("Estado do sistema:");
+            for(SystemElements se : elements.values()){
+                cp.print(se.toString());
+            }
+
+            cp.print("\nTop 10 pesquisas:");
+            for(String s : topSearches){
+                cp.print("- " + s);
+            }
+        } catch (NotBoundException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void run() {

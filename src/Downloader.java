@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.HashSet;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -29,6 +32,14 @@ public class Downloader implements Runnable{
     }
 
     public void run() {
+        ServerActions su = null;
+        try {
+            su = (ServerActions) LocateRegistry.getRegistry(7000).lookup("server");
+            su.updateDownloaderStatus(true, id, PORT);
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
+        }
+
         // Iniciar socket
         MulticastSocket socket = null;
         String url = null;
@@ -104,6 +115,8 @@ public class Downloader implements Runnable{
                             wordsToSend += "word" + counter + ";" + s + "|";
                             counter++;
                         }
+                        packet = new DatagramPacket(wordsToSend.getBytes(), wordsToSend.getBytes().length, group, PORT);
+                        socket.send(packet);
                         // Links
                         String linksToSend = "";
                         counter = 0;
@@ -116,8 +129,11 @@ public class Downloader implements Runnable{
                             linksToSend += "link" + counter + ";" + s + "|";
                             counter++;
                         }
-                        //System.out.println(sr);
+                        packet = new DatagramPacket(linksToSend.getBytes(), linksToSend.getBytes().length, group, PORT);
+                        socket.send(packet);
 
+                        SearchResult sr = new SearchResult(url, title, citation, null, null);
+                        System.out.println("Downloader " + id + ": " + sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
 
                     } catch (HttpStatusException e) {
                         System.out.println("Couldn't access '" + e.getUrl() + "'");
@@ -135,6 +151,11 @@ public class Downloader implements Runnable{
         }
         finally {
             socket.close();
+            try {
+                su.updateDownloaderStatus(false, id, PORT);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
