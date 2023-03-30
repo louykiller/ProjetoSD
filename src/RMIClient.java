@@ -17,7 +17,7 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
     public void print(String s) throws java.rmi.RemoteException{
         System.out.println(s);
     }
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         user = null;
         try {
             Registry r = LocateRegistry.createRegistry(7001);
@@ -36,7 +36,7 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
                 }
                 else
                     System.out.println("| 3 - Log Out                                               |");
-                System.out.println("| 9 - Informações gerais sobre o sistema                    |");
+                System.out.println("| 9 - System Details                                        |");
                 System.out.println("| 0 - Exit                                                  |");
                 System.out.println("_____________________________________________________________");
 
@@ -70,6 +70,7 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
                         // Log In
                         case 3 -> {
                             if(user != null) {
+                                ca.logout();
                                 user = null;
                                 System.out.println("Logged out successfully");
                             }
@@ -105,10 +106,8 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
                                 System.out.println("Couldn't register. Please try again with other credentials.");
                             }
                         }
-                        // Informações de sistema
-                        case 9 -> {
-                            ca.printSystemDetails();
-                        }
+                        // System Details
+                        case 9 -> ca.printSystemDetails();
                         default -> System.out.println("Invalid input please try again!");
                     }
                 } catch (NumberFormatException e){

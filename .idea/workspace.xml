@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Alterações do multicast">
-      <change afterPath="$PROJECT_DIR$/src/BarrelElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ClientPrint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DownloaderElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SystemElements.java" afterDir="false" />
+    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Alterações para fazer o 6. Página de administração atualizada em tempo real">
+      <change afterPath="$PROJECT_DIR$/urlsQueue.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Downloader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Googol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Googol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RMIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMIClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RMISearchModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMISearchModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerActions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680109335769</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Alterações para fazer o 6. Página de administração atualizada em tempo real">
+      <created>1680217170254</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680217170254</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -133,6 +136,7 @@
     <MESSAGE value="Updates" />
     <MESSAGE value="After meeting" />
     <MESSAGE value="Alterações do multicast" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alterações do multicast" />
+    <MESSAGE value="Alterações para fazer o 6. Página de administração atualizada em tempo real" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alterações para fazer o 6. Página de administração atualizada em tempo real" />
   </component>
 </project>

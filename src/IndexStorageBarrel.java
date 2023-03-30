@@ -24,8 +24,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
 
     private String MULTICAST_ADDRESS = "224.3.2.1";
     private int PORT = 4321;
-    private long SLEEP_TIME = 15000;
-    private int id;
+    private final int id;
 
     public HashMap<String,ArrayList<String>> words_a_m;
     public HashMap<String,ArrayList<String>> words_n_z;
@@ -264,7 +263,6 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             r.rebind("search", this);
             su = (ServerActions) LocateRegistry.getRegistry(7000).lookup("server");
             su.updateBarrelStatus(true, id, PORT);
-
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }

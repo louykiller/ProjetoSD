@@ -20,7 +20,6 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
     private final List<String> urlsQueue;
     private final ArrayList<User> users;
     private final File f = new File("users.txt");
-    private int barrel;
     public RMISearchModule(List<String> urlsQueue) throws RemoteException{
         super();
         this.urlsQueue = urlsQueue;
@@ -30,6 +29,7 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
 
     public void indexURL(String url) throws RemoteException{
         System.out.println("URL Recieved: " + url);
+        // Adds the URL to the start of the queue
         urlsQueue.add(0, url);
     }
 
@@ -48,6 +48,7 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
 
     public void logout() throws RemoteException{
         // Log out the user
+        System.out.println("User logged out");
     }
 
     public User register(String username, String password, String name) throws RemoteException{
@@ -88,23 +89,27 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
     public ArrayList<String> topSearches = new ArrayList<>();
 
     public void updateDownloaderStatus(boolean active, int id, int port) throws java.rmi.RemoteException {
+        // Insert / Update the downloaderElement
         elements.put("D" + id, new DownloaderElement(id, port, active));
     }
     public void updateBarrelStatus(boolean active, int id, int port) throws java.rmi.RemoteException {
+        // Insert / Update the barrelElement
         elements.put("B" + id, new BarrelElement(id, port, active));
     }
     public void updateTopSearches(ArrayList<String> topSearches) throws java.rmi.RemoteException {
+        // Update the top searches
         this.topSearches = topSearches;
     }
-
     public void printSystemDetails() throws java.rmi.RemoteException{
         try {
+            // Gets the registry for the client print
             ClientPrint cp = (ClientPrint) LocateRegistry.getRegistry(7001).lookup("client");
+            // System status (Barrels and Downloaders)
             cp.print("Estado do sistema:");
             for(SystemElements se : elements.values()){
                 cp.print(se.toString());
             }
-
+            // Top 10 Searches
             cp.print("\nTop 10 pesquisas:");
             for(String s : topSearches){
                 cp.print("- " + s);
@@ -112,7 +117,6 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         } catch (NotBoundException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void run() {
