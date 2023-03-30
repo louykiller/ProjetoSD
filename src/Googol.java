@@ -29,7 +29,7 @@ public class Googol  {
         System.out.println("A iniciar os barrels");
         // Criar e inicar os barrels
         ArrayList<Thread> barrels = new ArrayList<>();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 3; i++) {
             barrels.add(new Thread(new IndexStorageBarrel(i)));
             barrels.get(i).start();
         }
