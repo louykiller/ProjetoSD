@@ -10,7 +10,7 @@ public class Googol  {
     public static void main(String[] args) throws InterruptedException, RemoteException {
         // Criar uma lista sincronizada
         List<String> urlsQueue = Collections.synchronizedList(new LinkedList<String>());
-        urlsQueue.add("https://www.uc.pt");
+        urlsQueue.add("https://trailhead.salesforce.com");
         // Ligar o server
         try {
             RMISearchModule rsm = new RMISearchModule(urlsQueue);
@@ -38,7 +38,6 @@ public class Googol  {
         for (int i = 0; i < 3; i++) {
             downloaders.get(i).join();
         }
-
 
     }
 }

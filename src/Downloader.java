@@ -104,6 +104,9 @@ public class Downloader implements Runnable{
                             wordsToSend += "word" + counter + ";" + s + "|";
                             counter++;
                         }
+                        packet = new DatagramPacket(wordsToSend.getBytes(), wordsToSend.getBytes().length, group, PORT);
+                        socket.send(packet);
+                        wordsToSend = "";
                         // Links
                         String linksToSend = "";
                         counter = 0;
@@ -116,8 +119,12 @@ public class Downloader implements Runnable{
                             linksToSend += "link" + counter + ";" + s + "|";
                             counter++;
                         }
-                        //System.out.println(sr);
+                        packet = new DatagramPacket(linksToSend.getBytes(), linksToSend.getBytes().length, group, PORT);
+                        socket.send(packet);
+                        linksToSend = "";
 
+                        SearchResult sr = new SearchResult(url, title, citation, null, null);
+                        System.out.println("Downloader " + id + ": " + sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
 
                     } catch (HttpStatusException e) {
                         System.out.println("Couldn't access '" + e.getUrl() + "'");

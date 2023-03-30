@@ -28,6 +28,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
 
     @Override
     public ArrayList<SearchResult> search(String searchWords) throws RemoteException {
+        // TODO: Alterar esta função para mandar os resultados de pesquisa corretos
         ArrayList<SearchResult> srs = new ArrayList<>();
         srs.add(new SearchResult("The url" , "The title", "The citation", null, null));
         return srs;
@@ -255,7 +256,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
                 String p = new String(packet.getData(), 0, packet.getLength());
-                //System.out.println(p);
+                //System.out.println("Barrel " + id + ": " + p);
                 // Se o length for menor que 4, houve algum erro
                 if(p.length() < 4)
                     continue;
@@ -282,7 +283,9 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                     if(!url.equals("")){
                         // TODO: Adicionar ao barrel
                         SearchResult sr = new SearchResult(url, title, citation, words, urls);
-                        System.out.println(sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
+                        System.out.println("Barrel " + id + ": " + sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
+                        words = new ArrayList<>();
+                        urls = new ArrayList<>();
                     }
                     // url
                     String[] temp = stuff[0].split(";");

@@ -24,6 +24,7 @@ public class RMIClient {
                 }
                 else
                     System.out.println("| 3 - Log Out                                               |");
+                System.out.println("| 9 - Informações gerais sobre o sistema                    |");
                 System.out.println("| 0 - Exit                                                  |");
                 System.out.println("_____________________________________________________________");
 
@@ -91,6 +92,10 @@ public class RMIClient {
                             } else {
                                 System.out.println("Couldn't register. Please try again with other credentials.");
                             }
+                        }
+                        // Informações de sistema
+                        case 9 -> {
+                            System.out.println("Informações gerais sobre o sistema:");
                         }
                         default -> System.out.println("Invalid input please try again!");
                     }
