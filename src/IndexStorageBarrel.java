@@ -15,7 +15,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.security.UnrecoverableKeyException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -252,10 +251,11 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
 
             while(true){
                 // Recieve packets
-                byte[] buffer = new byte[256];
+                byte[] buffer = new byte[1050];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
                 String p = new String(packet.getData(), 0, packet.getLength());
+                //System.out.println(p);
                 // Se o length for menor que 4, houve algum erro
                 if(p.length() < 4)
                     continue;
@@ -293,9 +293,8 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                     if(temp.length > 1)
                         title = temp[1];
                     // citation
-                    temp = stuff[2].split(";");
-                    if(temp.length > 1)
-                        citation = temp[1];
+                    if(stuff[2].length() > 9)
+                        citation = stuff[2].substring(9);
                 }
             }
         }

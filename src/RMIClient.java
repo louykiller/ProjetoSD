@@ -94,16 +94,14 @@ public class RMIClient {
                         }
                         default -> System.out.println("Invalid input please try again!");
                     }
-
                 } catch (NumberFormatException e){
                     System.out.println("Invalid input please try again!");
                 }
-
             }
-
             sc.close();
         } catch (Exception e) {
             System.out.println("Server offline. Try again later");
+            e.printStackTrace();
         }
 
     }
