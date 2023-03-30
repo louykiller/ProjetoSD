@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Fix na comunicação multicast">
+    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Alterações do multicast">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Downloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Googol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Googol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RMIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMIClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Search.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,14 +108,7 @@
       <option name="project" value="LOCAL" />
       <updated>1680109335769</updated>
     </task>
-    <task id="LOCAL-00007" summary="Fix na comunicação multicast">
-      <created>1680176319689</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1680176319689</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -135,7 +127,6 @@
     <MESSAGE value="Updates" />
     <MESSAGE value="After meeting" />
     <MESSAGE value="Alterações do multicast" />
-    <MESSAGE value="Fix na comunicação multicast" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix na comunicação multicast" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alterações do multicast" />
   </component>
 </project>
