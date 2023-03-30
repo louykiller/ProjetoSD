@@ -2,16 +2,28 @@
 // Pretende-se que este cliente tenha uma UI bastante simples e que
 //se limite a invocar os métodos remotos no servidor RMI.
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class RMIClient {
+public class RMIClient extends UnicastRemoteObject implements ClientPrint {
     public static User user;
+    public RMIClient() throws RemoteException {
+        super();
+    }
+    public void print(String s) throws java.rmi.RemoteException{
+        System.out.println(s);
+    }
     public static void main(String args[]) {
         user = null;
         try {
-            ClientActions ca = (ClientActions) LocateRegistry.getRegistry(7000).lookup("server");
+            Registry r = LocateRegistry.createRegistry(7001);
+            r.rebind("client", new RMIClient());
+
+            ServerActions ca = (ServerActions) LocateRegistry.getRegistry(7000).lookup("server");
             Scanner sc = new Scanner(System.in);
             while (true){
                 System.out.println("_____________________________________________________________");
@@ -95,7 +107,7 @@ public class RMIClient {
                         }
                         // Informações de sistema
                         case 9 -> {
-                            System.out.println("Informações gerais sobre o sistema:");
+                            ca.printSystemDetails();
                         }
                         default -> System.out.println("Invalid input please try again!");
                     }

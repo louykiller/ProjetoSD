@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -257,11 +258,15 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
 
 	public void run(){
         Registry r = null;
+        ServerActions su = null;
         try {
             r = LocateRegistry.createRegistry(8000 + id);
             r.rebind("search", this);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            su = (ServerActions) LocateRegistry.getRegistry(7000).lookup("server");
+            su.updateBarrelStatus(true, id, PORT);
+
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
         }
         MulticastSocket socket = null;
         try{
@@ -348,7 +353,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                     continue;
                 String[] stuff = p.split("\\|");
                 // Verificar a primeira palavra (word ou link)
-                // Words
+                // Words (wordX;"something")
                 if(stuff[0].startsWith("word")){
                     for(String s : stuff){
                         String[] temp = s.split(";");
@@ -356,7 +361,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                             words.add(temp[1]);
                     }
                 }
-                // Links
+                // Links (linkX;"something")
                 else if (stuff[0].startsWith("link")){
                     for(String s : stuff){
                         String[] temp = s.split(";");
@@ -364,11 +369,13 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                             urls.add(temp[1]);
                     }
                 }
-                // Header
+                // Header (url;"something"|title;"something"|citation;"something")
                 else if (stuff[0].startsWith("url")){
                     if(!url.equals("")){
                         // TODO: Adicionar ao barrel
                         SearchResult sr = new SearchResult(url, title, citation, words, urls);
+
+
                         System.out.println("Barrel " + id + ": " + sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
                         words = new ArrayList<>();
                         urls = new ArrayList<>();
@@ -391,6 +398,11 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             e.printStackTrace();
         } finally {
             socket.close();
+            try {
+                su.updateBarrelStatus(false, id, PORT);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
