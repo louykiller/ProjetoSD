@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="After meeting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Googol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Googol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
+=======
+    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Alterações do multicast">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Downloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RMIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMIClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Search.java" afterDir="false" />
+>>>>>>> a7888736d686abc44d68a8c890f45a2e1759a14a
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,16 +135,37 @@
       <option name="project" value="LOCAL" />
       <updated>1680041395077</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Alterações do multicast">
+      <created>1680109335769</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680109335769</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
+<<<<<<< HEAD
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+=======
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+>>>>>>> a7888736d686abc44d68a8c890f45a2e1759a14a
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Updates" />
     <MESSAGE value="After meeting" />
-    <option name="LAST_COMMIT_MESSAGE" value="After meeting" />
+    <MESSAGE value="Alterações do multicast" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alterações do multicast" />
   </component>
 </project>

@@ -31,13 +31,20 @@ public class Downloader implements Runnable{
     public void run() {
         // Iniciar socket
         MulticastSocket socket = null;
+        String url = null;
         // Enquanto houver urls na queue
         try {
+            // MULTICAST
             socket = new MulticastSocket();  // create socket without binding it (only for sending)
+            InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
             while (true) {
-                if (!urlsQueue.isEmpty()) {
-                    // Ir buscar o proximo url
-                    String url = urlsQueue.remove(0);
+                if (urlsQueue.size() > 0) {
+                    // Tentar ir buscar o proximo url
+                    try {
+                        url = urlsQueue.remove(0);
+                    } catch (java.lang.IndexOutOfBoundsException e){
+                        continue;
+                    }
                     // TODO: Talvez verificar se o link ja foi visitado
                     HashSet<String> words = new HashSet<String>();
                     HashSet<String> urls = new HashSet<String>();
@@ -75,9 +82,13 @@ public class Downloader implements Runnable{
                         // Adicionar os links retirados ao fim da queue
                         urlsQueue.addAll(urls);
 
-                        // MULTICAST
-                        InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
                         // header
+                        // Reduzir o title
+                        if(title.length() > 153)
+                            title = title.substring(0, 150) + "...";
+                        // Reduzir a citation
+                        if(citation.length() > 253)
+                            citation = citation.substring(0, 250) + "...";
                         String header = "url;" + url + "|title;" + title + "|citation;" + citation;
                         DatagramPacket packet = new DatagramPacket(header.getBytes(), header.getBytes().length, group, PORT);
                         socket.send(packet);
