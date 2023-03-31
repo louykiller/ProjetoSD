@@ -87,7 +87,9 @@ public class Downloader implements Runnable{
                         Elements links = doc.select("a[href]");
                         for (Element link : links) {
                             // Adicionar link
-                            urls.add(link.attr("abs:href"));
+                            String l = link.attr("abs:href");
+                            if(l.startsWith("http"))
+                                urls.add(l);
                         }
 
                         // Adicionar os links retirados ao fim da queue
@@ -133,7 +135,7 @@ public class Downloader implements Runnable{
                         socket.send(packet);
 
                         SearchResult sr = new SearchResult(url, title, citation, null, null);
-                        System.out.println("Downloader " + id + ": " + sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
+                        System.out.println("Downloader " + id + ": " + url);
 
                     } catch (HttpStatusException e) {
                         System.out.println("Couldn't access '" + e.getUrl() + "'");

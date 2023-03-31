@@ -76,14 +76,22 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         }
         return newUser;
     }
+    private int barrelIndex;
     public ArrayList<SearchResult> search(String searchWords) throws RemoteException{
-        // TODO: Get information from barrels
-        try {
-            Search srch = (Search) LocateRegistry.getRegistry(8000).lookup("search");
-            return srch.search(searchWords);
-        } catch (NotBoundException e) {
-            throw new RuntimeException(e);
+        ArrayList<SearchResult> results = null;
+        while(results == null) {
+            try {
+                Search srch = (Search) LocateRegistry.getRegistry(8000 + barrelIndex).lookup("search");
+                results = srch.search(searchWords);
+            } catch (NotBoundException e) {
+                System.out.println("Couldn't get info from barrel " + barrelIndex);
+            }
+            barrelIndex++;
+            if(barrelIndex == 3){
+                barrelIndex = 0;
+            }
         }
+        return results;
     }
     public HashMap<String, SystemElements> elements = new HashMap<>();
     public ArrayList<String> topSearches = new ArrayList<>();
@@ -120,6 +128,7 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
     }
 
     public void run() {
+        barrelIndex = 0;
         // Ligar o server
         try {
             Registry r = LocateRegistry.createRegistry(7000);

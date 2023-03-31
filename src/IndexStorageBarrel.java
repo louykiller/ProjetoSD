@@ -364,8 +364,8 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                         // TODO: Adicionar ao barrel
                         //System.out.println("========================");
                         //System.out.println("Url: " + url + "\nTitle: " + title + " \nCitation: " + citation);
-                        //SearchResult sr = new SearchResult(url,title, citation, words, urls);
-                        //System.out.println(sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
+                        SearchResult sr = new SearchResult(url,title, citation, words, urls);
+                        System.out.println(sr + "\n" + words.size() + " words and " + urls.size() + " links\n");
                         //System.out.println("==== ALL WORDS =====");
                         //System.out.println(words);
                         //System.out.println("==== ALL URLS =====");
