@@ -20,9 +20,11 @@ https://www.instagram.com/jardimbotanicouc/
 https://apps.uc.pt/courses/PT/course/3081
 https://apps.uc.pt/courses/pt/index
 https://www.uc.pt/jardimbotanico/contactos/
+http://www.smtuc.pt/
 https://www.uc.pt/candidaturas/estudante-internacional/
 https://www.uc.pt/noticias
 https://worldheritage.uc.pt:443/pt/colegiotrindade/
+http://ucbusiness.uc.pt
 https://apps.uc.pt/courses/PT/course/2301
 https://apps.uc.pt/courses/PT/course/2422
 https://apps.uc.pt/courses/PT/course/6102
@@ -106,6 +108,7 @@ https://apps.uc.pt/courses/PT/course/7361
 https://www.uc.pt/auc/orientacoes
 https://www.uc.pt/auc/info/horario
 http://www.uc.pt/ruas/
+https://www.uc.pt/auc/visita
 https://www.uc.pt/colegioartes/Cr/hor
 https://www.uc.pt/colegioartes/Investigacao
 https://www.uc.pt/imprensa_uc
@@ -123,6 +126,7 @@ https://www.uc.pt/fluc
 https://apps.uc.pt/courses/PT/course/661
 https://www.facebook.com/JardimBotanicoUC
 https://apps.uc.pt/courses/PT/course/9501
+https://www.uc.pt/auc/info/contactos
 https://www.uc.pt/go/denuncia
 https://inforestudante.uc.pt/nonio/security/login.do
 https://www.facebook.com/univdecoimbra/
@@ -267,11 +271,15 @@ https://www.uc.pt/research/escolas-doutorais/
 https://www.uc.pt/internacional/erasmus
 https://www.uc.pt/ucbusiness/
 https://www.uc.pt/candidaturas/mestrados-2023-2024/
+https://www.uc.pt/auc/instituicao/historia/#modal-search
+https://www.uc.pt/auc/servicos
 https://apps.uc.pt/courses/PT/course/2501
+https://www.uc.pt/auc/instituicao/legislacao
 https://estudogeral.uc.pt/
 https://www.uc.pt/jardimbotanico/espacos-do-jardim/
 https://apps.uc.pt/courses/PT/course/2621
 https://www.facebook.com/UCBusinessGlobal
+https://www.uc.pt/auc/fundos/cadastro_fundos
 https://apps.uc.pt/courses/PT/course/6661
 https://www.uc.pt/colegioartes/apres/estat
 https://noticias.uc.pt/artigos/universidade-de-coimbra-junta-1-3-toneladas-de-equipamentos-eletricos-para-reciclagem
@@ -286,6 +294,7 @@ http://agenda.uc.pt/#1499291250453-6f7110a3-74a5
 https://www.uc.pt/alumni
 http://www.uc.pt/go/lusofonia
 https://worldheritage.uc.pt:443/pt/contactos/
+https://www.uc.pt/auc/info/copy_of_precos
 https://www.uc.pt/turismo
 https://www.uc.pt/sobrenos/localizacao_contactos
 https://www.uc.pt/research/infraestruturas-cientificas-1/

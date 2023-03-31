@@ -471,6 +471,9 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                             knownUrls.get(url).parentUrls = new ArrayList<>(parentUrls.get(url));
 
 
+
+
+
                         words = new ArrayList<String>();
                         urls = new ArrayList<String>();
                         //writeBarrels();
