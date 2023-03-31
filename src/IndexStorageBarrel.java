@@ -45,6 +45,13 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             }
         }
     }
+
+    /**
+     *
+     * @param searchWords
+     * @return urls of searched word by relevance
+     * @throws RemoteException
+     */
     @Override
     public ArrayList<SearchResult> search(String searchWords) throws RemoteException {
         // TODO: Ir buscar os 10 mais relevantes para a pesquisa
@@ -75,12 +82,20 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         return results;
     }
 
+    /**
+     * add to url barrels
+     * note: meaning of names switched because previous implementations
+     * @param key_url url to be added to the list of a given url
+     * @param value_url url to serve as key in the hash map
+     */
     public void addToUrl(String key_url,String value_url){
         String[] data = value_url.split("://");
         char firstChar = data[1].charAt(0);
         char upperFirst = Character.toUpperCase(firstChar);
 
+        //find what barrel it belongs to
         if(Character.compare(upperFirst, 'N') < 0){
+            //if value_url is already a key in the hashmap update its value
             if(this.url_a_m.containsKey(value_url)){
                 ArrayList<String> urls = new ArrayList<String>();
                 urls = this.url_a_m.get(value_url);
@@ -90,6 +105,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                     }
                 }
             }
+            //add new key and value to the hash map
             else{
                 ArrayList<String> newArray = new ArrayList<String>();
                 newArray.add(key_url);
@@ -116,14 +132,17 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
 
     /**
      * add to word barrel
-     * @param key_url base url
-     * @param value_word word that points to base url
+     * note: meaning of names switched because previous implementations
+     * @param key_url key_url url to be added to the list of a given word
+     * @param value_word word to serve as key in the hash map
      */
     public  void addToWord(String key_url,String value_word){
         char firstChar = value_word.charAt(0);
         char upperFirst = Character.toUpperCase(firstChar);
 
+        //find what barrel it belongs to
         if(Character.compare(upperFirst, 'N') < 0){
+            //if value_word is already a key in the hashmap update its value
             if(this.words_a_m.containsKey(value_word)){
                 ArrayList<String> urls = new ArrayList<String>();
                 urls = this.words_a_m.get(value_word);
@@ -133,6 +152,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                     }
                 }
             }
+            //add new key and value to the hash map
             else{
                 ArrayList<String> newArray = new ArrayList<String>();
                 newArray.add(key_url);
@@ -272,7 +292,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                             // Add the url
                             temp.add(url);
                             parentUrls.put(x, temp);
-
+                            //add to specific barrel
                             addToUrl(url,x);
 
                         }
@@ -286,7 +306,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                             // Add the url
                             temp.add(url);
                             wordsToUrls.put(x, temp);
-
+                            //add to specific barrel
                             addToWord(url,x);
 
                         }
