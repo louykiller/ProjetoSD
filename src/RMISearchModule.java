@@ -77,7 +77,7 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
     private final HashMap<String, Integer> searches = new HashMap<>();
 
     public ArrayList<SearchResult> search(String searchWords) throws RemoteException{
-        ArrayList<SearchResult> results = null;
+        ArrayList<SearchResult> results = new ArrayList<>();
         while(results == null) {
             try {
                 Search srch = (Search) LocateRegistry.getRegistry(8000 + barrelIndex).lookup("search");
@@ -96,7 +96,6 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
                 barrelIndex = 0;
             }
         }
-
         return results;
     }
     public HashMap<String, SystemElements> elements = new HashMap<>();

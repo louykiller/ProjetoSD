@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Googol:jar" />
+      <artifact name="RMIClient:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Pesquisa">
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RMISearchModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMISearchModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/urlsQueue.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsQueue.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/urlsVisited.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsVisited.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +55,9 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/loure/Downloads/jsoup-1.15.4.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -55,7 +65,21 @@
       <recent name="C:\Users\loure\OneDrive\Desktop\uni\SD\Projeto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Googol">
+  <component name="RunManager" selected="Application.Googol (2)">
+    <configuration name="Googol (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Googol" />
+      <module name="Projeto" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Googol (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Googol" />
+      <module name="Projeto" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Googol" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Googol" />
       <module name="Projeto" />
@@ -72,8 +96,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Googol" />
         <item itemvalue="Application.RMIClient" />
+        <item itemvalue="Application.Googol (2)" />
+        <item itemvalue="Application.Googol (1)" />
+        <item itemvalue="Application.Googol" />
       </list>
     </recent_temporary>
   </component>
