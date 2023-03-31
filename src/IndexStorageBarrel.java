@@ -29,6 +29,11 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
     public HashMap<String,ArrayList<String>> url_a_m;
     public HashMap<String,ArrayList<String>> url_n_z;
 
+    /**
+     * Sort hash map based on occurences
+     * @param hm hashmap with {word:num_words}
+     * @return
+     */
     public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm) {
         // Create a list from elements of HashMap
         List<Entry<String, Integer> > list = new LinkedList<Entry<String, Integer> >(hm.entrySet());
@@ -49,6 +54,13 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         }
         return temp;
     }
+
+    /**
+     *
+     * @param searchWords searched words - "palavra1 palavra2 palavra3"
+     * @return Urls that the searched words are presented order by relevance and grouped in 10
+     * @throws RemoteException
+     */
     @Override
     public ArrayList<ArrayList<SearchResult>> search(String searchWords) throws RemoteException {
         // TODO: Ir buscar os 10 mais relevantes para a pesquisa
@@ -100,48 +112,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         return srs;
     }
 
-    @Override
-    public ArrayList<ArrayList<SearchResult>> mostRelevantUrl() throws RemoteException {
-        this.srs = new ArrayList<ArrayList<SearchResult>>();
-        HashMap<String,Integer> relevance = new HashMap<String,Integer>();
 
-        int valor = 1;
-        for (String url : this.url_a_m.keySet()) {
-            if (relevance.keySet().contains(url)) {
-                valor = relevance.get(url) + 1;
-                relevance.replace(url, valor);
-            } else {
-                relevance.put(url, 1);
-            }
-        }
-        for (String url : this.url_n_z.keySet()) {
-            if (relevance.keySet().contains(url)) {
-                valor = relevance.get(url) + 1;
-                relevance.replace(url, valor);
-            } else {
-                relevance.put(url, 1);
-            }
-
-        }
-
-        //relevance -> [{palavra : num_ocorrencias},{palavra : num_ocorrencias},{palavra : num_ocorrencias}]
-        Map<String,Integer> sorted_relevance = sortByValue(relevance);
-
-        Set<String> sorted_set = sorted_relevance.keySet();
-        ArrayList<String> sorted_url = new ArrayList<String>(sorted_set);
-        ArrayList<SearchResult> aux_url = new ArrayList<SearchResult>();
-        int count = 0;
-
-        for(int i = 0 ; i < sorted_url.size() ; i++) {
-            if ((count % 10 == 0) && count > 0){
-                this.srs.add(aux_url);
-                aux_url = new ArrayList<SearchResult>();
-            }
-            aux_url.add(new SearchResult(sorted_url.get(i), "The title", "The citation", null, null));
-            count++;
-        }
-        return srs;
-    }
 
     // Main class
     /**
@@ -182,13 +153,12 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
      * @return urls com o novo adicionado
      * @throws IOException
      */
-    public HashMap<String,String> AddToHash(HashMap<String,String> barrel,String searchedWord,String searchedUrl) throws IOException{
-        HashMap<String,String> urls = new HashMap<String,String>();
-        urls = barrel;
-        barrel.put(searchedWord, searchedUrl);
-        return urls;
-    }
 
+    /**
+     * add url to url barrel
+     * @param key_url base url
+     * @param value_url url that point to base url
+     */
     public void addToUrl(String key_url,String value_url){
         String[] data = value_url.split("://");
         char firstChar = data[1].charAt(0);
@@ -228,33 +198,39 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             }
         }
     }
-    public  void addToWord(String key_word,String value_word){
+
+    /**
+     * add to word barrel
+     * @param key_url base url
+     * @param value_word word that points to base url
+     */
+    public  void addToWord(String key_url,String value_word){
         char firstChar = value_word.charAt(0);
         char upperFirst = Character.toUpperCase(firstChar);
 
         if(Character.compare(upperFirst, 'N') < 0){
-            if(this.words_a_m.containsKey(key_word)){
+            if(this.words_a_m.containsKey(key_url)){
                 ArrayList<String> valores = new ArrayList<String>();
                 valores = this.words_a_m.get(value_word);
                 if(!(valores == null)) {
                     if (!(valores.contains(value_word))) {
-                        this.words_a_m.get(key_word).add(value_word);
+                        this.words_a_m.get(key_url).add(value_word);
                     }
                 }
             }
             else{
                 ArrayList<String> newArray = new ArrayList<String>();
                 newArray.add(value_word);
-                this.words_a_m.put(key_word,newArray);
+                this.words_a_m.put(key_url,newArray);
             }
         }
         else{
-            if(this.words_n_z.containsKey(key_word)){
+            if(this.words_n_z.containsKey(key_url)){
                 ArrayList<String> valores = new ArrayList<String>();
-                valores = this.words_n_z.get(key_word);
+                valores = this.words_n_z.get(key_url);
                 if(!(valores == null)) {
                     if (!(valores.contains(value_word))) {
-                        this.words_n_z.get(key_word).add(value_word);
+                        this.words_n_z.get(key_url).add(value_word);
                     }
                 }
 
@@ -262,26 +238,17 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             else{
                 ArrayList<String> newArray = new ArrayList<String>();
                 newArray.add(value_word);
-                this.words_n_z.put(key_word,newArray);
+                this.words_n_z.put(key_url,newArray);
             }
         }
     }
 
 
-    public HashMap<String,String> createInverted(HashMap<String,ArrayList<String>> urls){
-        HashMap<String,String> inverted = new HashMap<String,String>();
-        String url;
-
-        for (Entry<String, ArrayList<String>> set : urls.entrySet()) {
-            url = set.getKey();
-            for (String x : set.getValue()){
-                inverted.put(x,url);
-            }
-        }
-
-        return inverted;
-    }
-
+    /**
+     * Constructor that initializes barrels and id
+     * @param id id of barrel
+     * @throws RemoteException
+     */
     public IndexStorageBarrel(int id) throws RemoteException {
         this.id = id;
         this.words_a_m = new HashMap<String,ArrayList<String>>();
@@ -290,6 +257,12 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         this.url_n_z = new HashMap<String,ArrayList<String>>();
     }
 
+    /**
+     * put in the barrels some testing info
+     * @param words_barrel
+     * @param url_barrel
+     * @return
+     */
     private ArrayList<HashMap<String, ArrayList<String>>> SplitBarrels(HashMap<String, ArrayList<String>> words_barrel,HashMap<String, ArrayList<String>> url_barrel) {
         ArrayList<HashMap<String, ArrayList<String>>> out_list = new ArrayList<HashMap<String, ArrayList<String>>>();
         String url;
@@ -316,8 +289,8 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
 
             }
 
-            words_a_m.put(url, word_aux);
-            words_n_z.put(url, word_aux2);
+            this.words_a_m.put(url, word_aux);
+            this.words_n_z.put(url, word_aux2);
 
         }
 
@@ -351,6 +324,9 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         return out_list;
     }
 
+    /**
+     * Print info in the barrels
+     */
     public void printBarrels(){
         System.out.println("==== Info in the words a__ barrel =====");
         for (Entry<String, ArrayList<String>> set : this.words_a_m.entrySet()) {
@@ -385,6 +361,11 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         }
     }
 
+    /**
+     * Search all words associated with an url
+     * @param url url in hash keys
+     * @return ArrayList of words
+     */
     public ArrayList<String> searchUrl(String url){
         if(this.url_a_m.containsKey(url)){
             return this.url_a_m.get(url);
@@ -395,15 +376,26 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         return null;
     }
 
-    public ArrayList<String> searchWord(String word){
-        if(this.words_a_m.containsKey(word)){
-            return this.words_a_m.get(word);
+    /**
+     * Get all words associated with an url
+     * @param url base url
+     * @return all words associated with an url
+     */
+    public ArrayList<String> searchWord(String url){
+        ArrayList<String> words = new ArrayList<String>();
+        if(this.words_a_m.containsKey(url)){
+            for(String s : words_a_m.get(url)){
+                words.add(s);
+            }
         }
-        else if(this.words_n_z.containsKey(word)){
-            return this.words_n_z.get(word);
+        else if(this.words_n_z.containsKey(url)){
+            for(String s:this.words_n_z.get(url)){
+                words.add(s);
+            }
         }
-        return null;
+        return words;
     }
+
     public void writeBarrels(){
         try{
             BufferedWriter out = new BufferedWriter(new FileWriter("barrel_out.txt", true));
@@ -478,6 +470,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             //HashMap<String,String> inverted = new HashMap<String,String>();
 
             // word -> url
+            //Populate the barrels with some demo info
             words_barrel = GetInfoBarrel("words_barrel.txt");
             url_barrel = GetInfoBarrel("url_barrel.txt");
 

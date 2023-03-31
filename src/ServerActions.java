@@ -6,7 +6,6 @@ public interface ServerActions extends Remote {
     User login(String username, String password) throws java.rmi.RemoteException;
     void logout() throws java.rmi.RemoteException;
     ArrayList<ArrayList<SearchResult>> search(String searchWords) throws java.rmi.RemoteException;
-    ArrayList<ArrayList<SearchResult>> mostRelevantUrl() throws java.rmi.RemoteException;
 
     void indexURL(String url) throws java.rmi.RemoteException;
     void updateDownloaderStatus(boolean active, int id, int port) throws java.rmi.RemoteException;
