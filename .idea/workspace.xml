@@ -7,8 +7,8 @@
     <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Samll fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Search.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/urlsQueue.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsQueue.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/urlsVisited.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsVisited.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +56,28 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\loure\OneDrive\Desktop\uni\SD\Projeto" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.Googol">
+    <configuration name="Googol" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Googol" />
+      <module name="Projeto" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RMIClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RMIClient" />
+      <module name="Projeto" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.RMIClient" />
+        <item itemvalue="Application.Googol" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
