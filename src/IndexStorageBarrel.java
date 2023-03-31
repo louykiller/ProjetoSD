@@ -13,8 +13,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class IndexStorageBarrel extends UnicastRemoteObject implements Search, Runnable {
@@ -23,16 +22,124 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
     private int PORT = 4321;
     private final int id;
 
-    private ArrayList<SearchResult> srs = new ArrayList<>();
+    private ArrayList<ArrayList<SearchResult>> srs;
 
     public HashMap<String,ArrayList<String>> words_a_m;
     public HashMap<String,ArrayList<String>> words_n_z;
     public HashMap<String,ArrayList<String>> url_a_m;
     public HashMap<String,ArrayList<String>> url_n_z;
+
+    public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm) {
+        // Create a list from elements of HashMap
+        List<Entry<String, Integer> > list = new LinkedList<Entry<String, Integer> >(hm.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
     @Override
-    public ArrayList<SearchResult> search(String searchWords) throws RemoteException {
+    public ArrayList<ArrayList<SearchResult>> search(String searchWords) throws RemoteException {
         // TODO: Ir buscar os 10 mais relevantes para a pesquisa
-        this.srs.add(new SearchResult("The url" , "The title", "The citation", null, null));
+        this.srs = new ArrayList<ArrayList<SearchResult>>();
+
+        String[] input_words = searchWords.split(" ");
+        HashMap<String,Integer> relevance = new HashMap<String,Integer>();
+
+        for(String word:input_words) {
+            int valor = 1;
+            for (String url : this.words_a_m.keySet()) {
+                if (this.words_a_m.get(url).contains(word)) {
+                    if (relevance.keySet().contains(word)) {
+                        valor = relevance.get(word) + 1;
+                        relevance.replace(word, valor);
+                    } else {
+                        relevance.put(word, 1);
+                    }
+                }
+            }
+            for (String url : this.words_n_z.keySet()) {
+                if (this.words_n_z.get(url).contains(word)) {
+                    if (relevance.keySet().contains(word)) {
+                        valor = relevance.get(word) + 1;
+                        relevance.replace(word, valor);
+                    } else {
+                        relevance.put(word, 1);
+                    }
+                }
+            }
+        }
+
+        //relevance -> [{palavra : num_ocorrencias},{palavra : num_ocorrencias},{palavra : num_ocorrencias}]
+        Map<String,Integer> sorted_relevance = sortByValue(relevance);
+
+        Set<String> sorted_set = sorted_relevance.keySet();
+        ArrayList<String> sorted_url = new ArrayList<String>(sorted_set);
+        ArrayList<SearchResult> aux_url = new ArrayList<SearchResult>();
+        int count = 0;
+
+        for(int i = 0 ; i < sorted_url.size() ; i++) {
+            if ((count % 10 == 0) && count > 0){
+                this.srs.add(aux_url);
+                aux_url = new ArrayList<SearchResult>();
+            }
+            aux_url.add(new SearchResult(sorted_url.get(i), "The title", "The citation", null, null));
+            count++;
+        }
+        return srs;
+    }
+
+    @Override
+    public ArrayList<ArrayList<SearchResult>> mostRelevantUrl() throws RemoteException {
+        this.srs = new ArrayList<ArrayList<SearchResult>>();
+        HashMap<String,Integer> relevance = new HashMap<String,Integer>();
+
+        int valor = 1;
+        for (String url : this.url_a_m.keySet()) {
+            if (relevance.keySet().contains(url)) {
+                valor = relevance.get(url) + 1;
+                relevance.replace(url, valor);
+            } else {
+                relevance.put(url, 1);
+            }
+        }
+        for (String url : this.url_n_z.keySet()) {
+            if (relevance.keySet().contains(url)) {
+                valor = relevance.get(url) + 1;
+                relevance.replace(url, valor);
+            } else {
+                relevance.put(url, 1);
+            }
+
+        }
+
+        //relevance -> [{palavra : num_ocorrencias},{palavra : num_ocorrencias},{palavra : num_ocorrencias}]
+        Map<String,Integer> sorted_relevance = sortByValue(relevance);
+
+        Set<String> sorted_set = sorted_relevance.keySet();
+        ArrayList<String> sorted_url = new ArrayList<String>(sorted_set);
+        ArrayList<SearchResult> aux_url = new ArrayList<SearchResult>();
+        int count = 0;
+
+        for(int i = 0 ; i < sorted_url.size() ; i++) {
+            if ((count % 10 == 0) && count > 0){
+                this.srs.add(aux_url);
+                aux_url = new ArrayList<SearchResult>();
+            }
+            aux_url.add(new SearchResult(sorted_url.get(i), "The title", "The citation", null, null));
+            count++;
+        }
         return srs;
     }
 
