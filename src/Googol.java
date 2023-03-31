@@ -99,11 +99,5 @@ public class Googol {
             barrels.add(new Thread(new IndexStorageBarrel(i)));
             barrels.get(i).start();
         }
-
-        // Esperar que os downloaders acabem
-        for (int i = 0; i < 3; i++) {
-            downloaders.get(i).join();
-        }
-
     }
 }

@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Samll fix">
+    <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Pesquisa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Downloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a-m_barrel.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/n-z_barrel.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Googol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Googol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RMIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMIClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RMISearchModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMISearchModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Search.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Search.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SearchResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/url_barrel.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/urlsQueue.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsQueue.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/urlsVisited.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsVisited.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/words_barrel.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +65,7 @@
       <recent name="C:\Users\loure\OneDrive\Desktop\uni\SD\Projeto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Googol">
+  <component name="RunManager">
     <configuration name="Googol" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Googol" />
       <module name="Projeto" />
@@ -80,8 +82,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Googol" />
         <item itemvalue="Application.RMIClient" />
+        <item itemvalue="Application.Googol" />
       </list>
     </recent_temporary>
   </component>
@@ -178,7 +180,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680268698152</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Pesquisa">
+      <created>1680286233391</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1680286233391</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Pesquisa">
+      <created>1680286518791</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1680286518791</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +221,7 @@
     <MESSAGE value="Samll fix" />
     <MESSAGE value="UrlsVisited" />
     <MESSAGE value="Corrected User login and register" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected User login and register" />
+    <MESSAGE value="Pesquisa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pesquisa" />
   </component>
 </project>
