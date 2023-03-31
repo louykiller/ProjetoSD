@@ -31,6 +31,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
     public HashMap<String,ArrayList<String>> url_n_z;
     @Override
     public ArrayList<SearchResult> search(String searchWords) throws RemoteException {
+        // TODO: Ir buscar os 10 mais relevantes para a pesquisa
         this.srs.add(new SearchResult("The url" , "The title", "The citation", null, null));
         return srs;
     }
@@ -442,6 +443,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                         String[] words_citation = citation.split(" ");
                         String[] words_title = title.split(" ");
 
+                        /*
                         for (String x : words){
                             for (String y : words_citation){
                                 addToWord(y,x);
@@ -451,9 +453,12 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                                 addToWord(z,x);
                             }
                         }
-
+                        */
+                        for(String x : words){
+                            addToWord(url, x);
+                        }
                         for (String x : urls){
-                            addToUrl(url,x);
+                            addToUrl(url, x);
                         }
 
                         words = new ArrayList<String>();
