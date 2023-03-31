@@ -16,6 +16,7 @@ public class Googol {
         public void run() {
             // Save the urlsQueue in a file
             try {
+                System.out.println("A atualizar urlsQueue");
                 File f = new File("urlsQueue.txt");
                 FileWriter fw = new FileWriter(f);
                 BufferedWriter bw = new BufferedWriter(fw);
@@ -28,6 +29,7 @@ public class Googol {
             }
             // Save the urlsVisited in a file
             try {
+                System.out.println("A atualizar urlsVisited");
                 File f = new File("urlsVisited.txt");
                 FileWriter fw = new FileWriter(f);
                 BufferedWriter bw = new BufferedWriter(fw);

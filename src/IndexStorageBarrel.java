@@ -67,10 +67,13 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             else{
                 aux = words_n_z.get(s);
             }
+            try {
+                Set<String> temp = new HashSet<>(aux);
+                if (temp.size() != 0)
+                    potentialresults.addAll(wordsToUrls.get(s));
+            } catch (NullPointerException e){
 
-            Set<String> temp = new HashSet<>(aux);
-            if(temp != null)
-                potentialresults.addAll(wordsToUrls.get(s));
+            }
         }
         // Get all the Search Results
         ArrayList<SearchResult> results = new ArrayList<>();
