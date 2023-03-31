@@ -55,15 +55,14 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
                             System.out.print("Googol Search:\n");
                             String searchWords = sc.nextLine();
                             // Get the results for the search words
-                            ArrayList<SearchResult> results = ca.search(searchWords);
+                            ArrayList<ArrayList<SearchResult>> results = ca.search(searchWords);
                             if (results == null)
                                 System.out.println("No results found!");
                             else {
-                                int i = 0;
-                                for (SearchResult rp : results) {
-                                    if(i++ == 10)
-                                        break;
-                                    System.out.println(rp.toString() + "\n");
+                                for(ArrayList ls : results) {
+                                    for (Object rp : ls) {
+                                        System.out.println(rp.toString());
+                                    }
                                 }
                             }
                         }
@@ -124,7 +123,6 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
             }
         } catch (Exception e) {
             System.out.println("Server offline. Try again later");
-            e.printStackTrace();
             exit(1);
         }
     }

@@ -77,8 +77,8 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         return newUser;
     }
     private int barrelIndex;
-    public ArrayList<SearchResult> search(String searchWords) throws RemoteException{
-        ArrayList<SearchResult> results = null;
+    public ArrayList<ArrayList<SearchResult>> search(String searchWords) throws RemoteException{
+        ArrayList<ArrayList<SearchResult>> results = null;
         while(results == null) {
             try {
                 Search srch = (Search) LocateRegistry.getRegistry(8000 + barrelIndex).lookup("search");
