@@ -63,54 +63,90 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
      */
     @Override
     public ArrayList<ArrayList<SearchResult>> search(String searchWords) throws RemoteException {
-        // TODO: Ir buscar os 10 mais relevantes para a pesquisa
-        this.srs = new ArrayList<ArrayList<SearchResult>>();
-
+        ArrayList<ArrayList<SearchResult>> outPut = new ArrayList<ArrayList<SearchResult>>();
+        ArrayList<SearchResult> falso_out_list = new ArrayList<>();
         String[] input_words = searchWords.split(" ");
-        HashMap<String,Integer> relevance = new HashMap<String,Integer>();
 
-        for(String word:input_words) {
-            int valor = 1;
-            for (String url : this.words_a_m.keySet()) {
-                if (this.words_a_m.get(url).contains(word)) {
-                    if (relevance.keySet().contains(word)) {
-                        valor = relevance.get(word) + 1;
-                        relevance.replace(word, valor);
-                    } else {
-                        relevance.put(word, 1);
+        ArrayList<String> words_falso = new ArrayList<>();
+        for(String s:input_words){
+            words_falso.add(s);
+        }
+
+        words_falso.add("palavra1");
+        falso_out_list.add(new SearchResult("url","title","citacion",words_falso,null));
+        outPut.add(falso_out_list);
+        return outPut;
+
+        // TODO: Ir buscar os 10 mais relevantes para a pesquisa
+        /*this.srs = new ArrayList<ArrayList<SearchResult>>();
+
+
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter("helper.txt", true));
+            out.write("Entrou\n");
+
+            HashMap<String, Integer> relevance = new HashMap<String, Integer>();
+
+            //Percorrer cada palavra da pesquisa
+            for (String word : input_words) {
+                out.write("Palavra " + word + " \n");
+                int valor = 1;
+
+                //ver se os urls onde a palavra esta
+                for (String url : this.words_a_m.keySet()) {
+                    if (this.words_a_m.get(url).contains(word)) {
+                        if (relevance.keySet().contains(word)) {
+                            valor = relevance.get(word) + 1;
+                            relevance.replace(word, valor);
+                        } else {
+                            relevance.put(word, 1);
+                        }
+                    }
+                }
+                for (String url : this.words_n_z.keySet()) {
+                    if (this.words_n_z.get(url).contains(word)) {
+                        if (relevance.keySet().contains(word)) {
+                            valor = relevance.get(word) + 1;
+                            relevance.replace(word, valor);
+                        } else {
+                            relevance.put(word, 1);
+                        }
                     }
                 }
             }
-            for (String url : this.words_n_z.keySet()) {
-                if (this.words_n_z.get(url).contains(word)) {
-                    if (relevance.keySet().contains(word)) {
-                        valor = relevance.get(word) + 1;
-                        relevance.replace(word, valor);
-                    } else {
-                        relevance.put(word, 1);
-                    }
+
+            for (String key : relevance.keySet()) {
+                out.write(key + " " + relevance.get(key) + '\n');
+            }
+
+
+            //relevance -> [{palavra : num_ocorrencias},{palavra : num_ocorrencias},{palavra : num_ocorrencias}]
+            Map<String, Integer> sorted_relevance = sortByValue(relevance);
+
+            Set<String> sorted_set = sorted_relevance.keySet();
+            ArrayList<String> sorted_url = new ArrayList<String>(sorted_set);
+            ArrayList<SearchResult> aux_url = new ArrayList<SearchResult>();
+            int count = 0;
+
+            for (int i = 0; i < sorted_url.size(); i++) {
+                if ((count % 10 == 0) && count > 0) {
+                    this.srs.add(aux_url);
+                    aux_url = new ArrayList<SearchResult>();
                 }
+                aux_url.add(new SearchResult(sorted_url.get(i), "The title", "The citation", null, null));
+                count++;
             }
+
+            out.close();
+        }
+        catch(IOException e){
+            System.out.println(e);
         }
 
-        //relevance -> [{palavra : num_ocorrencias},{palavra : num_ocorrencias},{palavra : num_ocorrencias}]
-        Map<String,Integer> sorted_relevance = sortByValue(relevance);
-
-        Set<String> sorted_set = sorted_relevance.keySet();
-        ArrayList<String> sorted_url = new ArrayList<String>(sorted_set);
-        ArrayList<SearchResult> aux_url = new ArrayList<SearchResult>();
-        int count = 0;
-
-        for(int i = 0 ; i < sorted_url.size() ; i++) {
-            if ((count % 10 == 0) && count > 0){
-                this.srs.add(aux_url);
-                aux_url = new ArrayList<SearchResult>();
-            }
-            aux_url.add(new SearchResult(sorted_url.get(i), "The title", "The citation", null, null));
-            count++;
-        }
         return srs;
+        */
     }
+
 
 
 
