@@ -72,7 +72,7 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e){
-            System.out.println("Error writing to file");
+            System.out.println("Error writing to user file");
         }
         return newUser;
     }
@@ -153,7 +153,7 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         } catch (EOFException e) {
             // EOF
         } catch (IOException e){
-            System.out.println("Error reading file");
+            System.out.println("Error reading user file");
         }
     }
 

@@ -121,8 +121,7 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
             }
         } catch (Exception e) {
             System.out.println("Server offline. Try again later");
-            e.printStackTrace();
+            exit(1);
         }
-
     }
 }

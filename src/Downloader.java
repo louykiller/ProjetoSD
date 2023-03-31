@@ -16,9 +16,11 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 public class Downloader implements Runnable{
     private final List<String> urlsQueue;
+    private final Set<String> urlsVisited;
 
     private String MULTICAST_ADDRESS = "224.3.2.1";
     private int PORT = 4321;
@@ -26,8 +28,9 @@ public class Downloader implements Runnable{
 
 
 
-    public Downloader(List<String> urlsQueue, int id){
+    public Downloader(List<String> urlsQueue, Set<String> urlsVisited, int id){
         this.urlsQueue = urlsQueue;
+        this.urlsVisited = urlsVisited;
         this.id = id;
     }
 
@@ -56,7 +59,14 @@ public class Downloader implements Runnable{
                     } catch (java.lang.IndexOutOfBoundsException e){
                         continue;
                     }
-                    // TODO: Talvez verificar se o link ja foi visitado
+                    // Se ja foi visitado
+                    if(urlsVisited.contains(url)){
+                        System.out.println("Downloader " + id + ": URL já visitado! " + url);
+                        String header = "url;" + url + "|title;null|citation;null";
+                        DatagramPacket packet = new DatagramPacket(header.getBytes(), header.getBytes().length, group, PORT);
+                        socket.send(packet);
+                        continue;
+                    }
                     HashSet<String> words = new HashSet<String>();
                     HashSet<String> urls = new HashSet<String>();
                     try {
@@ -88,10 +98,10 @@ public class Downloader implements Runnable{
                         for (Element link : links) {
                             // Adicionar link
                             String l = link.attr("abs:href");
+                            // Verificar se é um link valido
                             if(l.startsWith("http"))
                                 urls.add(l);
                         }
-
                         // Adicionar os links retirados ao fim da queue
                         urlsQueue.addAll(urls);
 
@@ -133,6 +143,8 @@ public class Downloader implements Runnable{
                         }
                         packet = new DatagramPacket(linksToSend.getBytes(), linksToSend.getBytes().length, group, PORT);
                         socket.send(packet);
+                        // Adicionar o url a lista dos visitados
+                        urlsVisited.add(url);
 
                         SearchResult sr = new SearchResult(url, title, citation, null, null);
                         System.out.println("Downloader " + id + ": " + url);

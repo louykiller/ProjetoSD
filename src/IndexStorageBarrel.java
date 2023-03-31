@@ -326,7 +326,7 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
             ArrayList<String> words = new ArrayList<>();
             ArrayList<String> urls = new ArrayList<>();
 
-            printBarrels();
+            //printBarrels();
 
             while(true){
                 // Recieve packets
