@@ -9,6 +9,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 public class RMIClient extends UnicastRemoteObject implements ClientPrint {
     public static User user;
     public RMIClient() throws RemoteException {
@@ -43,8 +45,11 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
                 try {
                     int input = Integer.parseInt(sc.nextLine());
 
-                    if (input == 0) break;
                     switch (input) {
+                        case 0 -> {
+                            sc.close();
+                            exit(0);
+                        }
                         // Search
                         case 1 -> {
                             System.out.print("Googol Search:\n");
@@ -114,7 +119,6 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
                     System.out.println("Invalid input please try again!");
                 }
             }
-            sc.close();
         } catch (Exception e) {
             System.out.println("Server offline. Try again later");
             e.printStackTrace();

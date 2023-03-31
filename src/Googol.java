@@ -43,7 +43,7 @@ public class Googol {
                 urlsQueue.add(s);
             }
         } catch (EOFException e) {
-
+            // Do nothing
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

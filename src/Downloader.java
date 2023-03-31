@@ -139,10 +139,8 @@ public class Downloader implements Runnable{
 
                     } catch (HttpStatusException e) {
                         System.out.println("Couldn't access '" + e.getUrl() + "'");
-                        e.printStackTrace();
                     } catch (IOException e) {
                         System.out.println("Error loading page");
-                        e.printStackTrace();
                     }
                 }
 
