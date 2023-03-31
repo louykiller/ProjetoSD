@@ -61,14 +61,14 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         }
         // If not, create user and return it
         User newUser = new User(username, password, name);
-        System.out.println("User registeresd: " + newUser.name);
+        System.out.println("User registered: " + newUser.name);
         users.add(newUser);
         // Add it to the file
         try {
-            FileOutputStream fos = new FileOutputStream(f, true);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(newUser);
-            oos.close();
+            FileWriter fw = new FileWriter(f, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(username + ";" + password + ";" + name + "\n");
+            bw.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e){
@@ -139,21 +139,21 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         }
         // Get all the info of users from text files
         try {
-            FileInputStream fis = new FileInputStream(f);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            User u;
-            while ((u = (User) ois.readObject()) != null) {
-                users.add(u);
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader (fr);
+            String s;
+            while((s = br.readLine()) != null){
+                String[] data = s.split(";");
+                users.add(new User(data[0], data[1], data[2]));
             }
-            ois.close();
+            br.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
-        } catch (ClassNotFoundException e){
-            System.out.println("Class not found");
         } catch (EOFException e) {
             // EOF
         } catch (IOException e){
             System.out.println("Error reading user file");
+            e.printStackTrace();
         }
     }
 

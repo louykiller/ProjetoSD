@@ -149,6 +149,8 @@ public class Downloader implements Runnable{
                         SearchResult sr = new SearchResult(url, title, citation, null, null);
                         System.out.println("Downloader " + id + ": " + url);
 
+                    } catch (java.lang.IllegalArgumentException e) {
+                        System.out.println("Malformed URL: " + url);
                     } catch (HttpStatusException e) {
                         System.out.println("Couldn't access '" + e.getUrl() + "'");
                     } catch (IOException e) {
