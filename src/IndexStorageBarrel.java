@@ -63,10 +63,11 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
      */
     @Override
     public ArrayList<ArrayList<SearchResult>> search(String searchWords) throws RemoteException {
-        ArrayList<ArrayList<SearchResult>> outPut = new ArrayList<ArrayList<SearchResult>>();
-        ArrayList<SearchResult> falso_out_list = new ArrayList<>();
+        //ArrayList<ArrayList<SearchResult>> outPut = new ArrayList<ArrayList<SearchResult>>();
+        //ArrayList<SearchResult> falso_out_list = new ArrayList<>();
         String[] input_words = searchWords.split(" ");
 
+        /*
         ArrayList<String> words_falso = new ArrayList<>();
         for(String s:input_words){
             words_falso.add(s);
@@ -76,52 +77,46 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         falso_out_list.add(new SearchResult("url","title","citacion",words_falso,null));
         outPut.add(falso_out_list);
         return outPut;
-
+*/
         // TODO: Ir buscar os 10 mais relevantes para a pesquisa
-        /*this.srs = new ArrayList<ArrayList<SearchResult>>();
+        this.srs = new ArrayList<ArrayList<SearchResult>>();
 
 
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("helper.txt", true));
             out.write("Entrou\n");
-
             HashMap<String, Integer> relevance = new HashMap<String, Integer>();
-
             //Percorrer cada palavra da pesquisa
-            for (String word : input_words) {
-                out.write("Palavra " + word + " \n");
-                int valor = 1;
+            String word = input_words[0];
+            //for (String word : input_words) {
+            out.write("Palavra " + word + " \n");
+            int valor = 1;
 
-                //ver se os urls onde a palavra esta
-                for (String url : this.words_a_m.keySet()) {
-                    if (this.words_a_m.get(url).contains(word)) {
-                        if (relevance.keySet().contains(word)) {
-                            valor = relevance.get(word) + 1;
-                            relevance.replace(word, valor);
-                        } else {
-                            relevance.put(word, 1);
-                        }
-                    }
-                }
-                for (String url : this.words_n_z.keySet()) {
-                    if (this.words_n_z.get(url).contains(word)) {
-                        if (relevance.keySet().contains(word)) {
-                            valor = relevance.get(word) + 1;
-                            relevance.replace(word, valor);
-                        } else {
-                            relevance.put(word, 1);
-                        }
-                    }
+            if(this.words_a_m.keySet().contains(word)){
+                if (relevance.keySet().contains(word)) {
+                    valor = relevance.get(word) + words_a_m.get(word).size();
+                    relevance.replace(word, valor);
+                } else {
+                    relevance.put(word, words_a_m.get(word).size());
                 }
             }
+
+            if(this.words_n_z.keySet().contains(word)){
+                if (relevance.keySet().contains(word)) {
+                    valor = relevance.get(word) + words_n_z.get(word).size();
+                    relevance.replace(word, valor);
+                } else {
+                    relevance.put(word, words_n_z.get(word).size());
+                }
+            }
+            //}
 
             for (String key : relevance.keySet()) {
                 out.write(key + " " + relevance.get(key) + '\n');
             }
 
-
             //relevance -> [{palavra : num_ocorrencias},{palavra : num_ocorrencias},{palavra : num_ocorrencias}]
-            Map<String, Integer> sorted_relevance = sortByValue(relevance);
+            /*Map<String, Integer> sorted_relevance = sortByValue(relevance);
 
             Set<String> sorted_set = sorted_relevance.keySet();
             ArrayList<String> sorted_url = new ArrayList<String>(sorted_set);
@@ -136,15 +131,14 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                 aux_url.add(new SearchResult(sorted_url.get(i), "The title", "The citation", null, null));
                 count++;
             }
-
+            */
             out.close();
         }
         catch(IOException e){
             System.out.println(e);
         }
 
-        return srs;
-        */
+        return null;
     }
 
 
@@ -198,39 +192,38 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
     public void addToUrl(String key_url,String value_url){
         String[] data = value_url.split("://");
         char firstChar = data[1].charAt(0);
-
         char upperFirst = Character.toUpperCase(firstChar);
 
         if(Character.compare(upperFirst, 'N') < 0){
-            if(this.url_a_m.containsKey(key_url)){
-                ArrayList<String> valores = new ArrayList<String>();
-                valores = this.url_a_m.get(key_url);
-                if(!(valores == null)) {
-                    if (!(valores.contains(value_url))) {
-                        this.url_a_m.get(key_url).add(value_url);
+            if(this.url_a_m.containsKey(value_url)){
+                ArrayList<String> urls = new ArrayList<String>();
+                urls = this.url_a_m.get(value_url);
+                if(!(urls == null)) {
+                    if (!(urls.contains(key_url))) {
+                        this.url_a_m.get(value_url).add(key_url);
                     }
                 }
             }
             else{
                 ArrayList<String> newArray = new ArrayList<String>();
-                newArray.add(value_url);
-                this.url_a_m.put(key_url,newArray);
+                newArray.add(key_url);
+                this.url_a_m.put(value_url,newArray);
             }
         }
         else{
-            if(this.url_n_z.containsKey(key_url)){
-                ArrayList<String> valores = new ArrayList<String>();
-                valores = this.url_n_z.get(key_url);
-                if(!(valores == null)){
-                    if(!(valores.contains(value_url))){
-                        this.url_n_z.get(key_url).add(value_url);
+            if(this.url_n_z.containsKey(value_url)){
+                ArrayList<String> urls = new ArrayList<String>();
+                urls = this.url_n_z.get(value_url);
+                if(!(urls == null)){
+                    if(!(urls.contains(key_url))){
+                        this.url_n_z.get(value_url).add(key_url);
                     }
                 }
             }
             else{
                 ArrayList<String> newArray = new ArrayList<String>();
-                newArray.add(value_url);
-                this.url_n_z.put(key_url,newArray);
+                newArray.add(key_url);
+                this.url_n_z.put(value_url,newArray);
             }
         }
     }
@@ -245,40 +238,38 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         char upperFirst = Character.toUpperCase(firstChar);
 
         if(Character.compare(upperFirst, 'N') < 0){
-            if(this.words_a_m.containsKey(key_url)){
-                ArrayList<String> valores = new ArrayList<String>();
-                valores = this.words_a_m.get(value_word);
-                if(!(valores == null)) {
-                    if (!(valores.contains(value_word))) {
-                        this.words_a_m.get(key_url).add(value_word);
+            if(this.words_a_m.containsKey(value_word)){
+                ArrayList<String> urls = new ArrayList<String>();
+                urls = this.words_a_m.get(value_word);
+                if(!(urls == null)) {
+                    if (!(urls.contains(key_url))) {
+                        this.words_a_m.get(value_word).add(key_url);
                     }
                 }
             }
             else{
                 ArrayList<String> newArray = new ArrayList<String>();
-                newArray.add(value_word);
-                this.words_a_m.put(key_url,newArray);
+                newArray.add(key_url);
+                this.words_a_m.put(value_word,newArray);
             }
         }
         else{
-            if(this.words_n_z.containsKey(key_url)){
-                ArrayList<String> valores = new ArrayList<String>();
-                valores = this.words_n_z.get(key_url);
-                if(!(valores == null)) {
-                    if (!(valores.contains(value_word))) {
-                        this.words_n_z.get(key_url).add(value_word);
+            if(this.words_n_z.containsKey(value_word)){
+                ArrayList<String> urls = new ArrayList<String>();
+                urls = this.words_n_z.get(value_word);
+                if(!(urls == null)) {
+                    if (!(urls.contains(key_url))) {
+                        this.words_n_z.get(value_word).add(key_url);
                     }
                 }
-
             }
             else{
                 ArrayList<String> newArray = new ArrayList<String>();
-                newArray.add(value_word);
-                this.words_n_z.put(key_url,newArray);
+                newArray.add(key_url);
+                this.words_n_z.put(value_word,newArray);
             }
         }
     }
-
 
     /**
      * Constructor that initializes barrels and id
