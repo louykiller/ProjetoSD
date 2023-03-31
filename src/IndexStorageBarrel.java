@@ -14,12 +14,19 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
+import java.util.Map.Entry;
+
 
 public class IndexStorageBarrel extends UnicastRemoteObject implements Search, Runnable {
 
     private String MULTICAST_ADDRESS = "224.3.2.1";
     private int PORT = 4321;
     private final int id;
+
+    public HashMap<String,ArrayList<String>> words_a_m = new HashMap<>();
+    public HashMap<String,ArrayList<String>> words_n_z = new HashMap<>();
+    public HashMap<String,ArrayList<String>> url_a_m = new HashMap<>();
+    public HashMap<String,ArrayList<String>> url_n_z = new HashMap<>();
 
     private HashMap<String, SearchResult> knownUrls = new HashMap<>();
     private HashMap<String, Set<String>> parentUrls = new HashMap<>();
@@ -44,7 +51,17 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         HashSet<String> potentialresults = new HashSet<>();
         // Get all potentialResults form the words
         for(String s : searchWords.toLowerCase().split(" ")){
-            Set<String> temp = wordsToUrls.get(s);
+            //Set<String> temp = wordsToUrls.get(s);
+
+            ArrayList<String> aux = new ArrayList<>();
+            if(Character.compare(s.charAt(0),'n') <0){
+                aux = words_a_m.get(s);
+            }
+            else{
+                aux = words_n_z.get(s);
+            }
+
+            Set<String> temp = new HashSet<>(aux);
             if(temp != null)
                 potentialresults.addAll(wordsToUrls.get(s));
         }
@@ -58,8 +75,133 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         return results;
     }
 
+    public void addToUrl(String key_url,String value_url){
+        String[] data = value_url.split("://");
+        char firstChar = data[1].charAt(0);
+        char upperFirst = Character.toUpperCase(firstChar);
+
+        if(Character.compare(upperFirst, 'N') < 0){
+            if(this.url_a_m.containsKey(value_url)){
+                ArrayList<String> urls = new ArrayList<String>();
+                urls = this.url_a_m.get(value_url);
+                if(!(urls == null)) {
+                    if (!(urls.contains(key_url))) {
+                        this.url_a_m.get(value_url).add(key_url);
+                    }
+                }
+            }
+            else{
+                ArrayList<String> newArray = new ArrayList<String>();
+                newArray.add(key_url);
+                this.url_a_m.put(value_url,newArray);
+            }
+        }
+        else{
+            if(this.url_n_z.containsKey(value_url)){
+                ArrayList<String> urls = new ArrayList<String>();
+                urls = this.url_n_z.get(value_url);
+                if(!(urls == null)){
+                    if(!(urls.contains(key_url))){
+                        this.url_n_z.get(value_url).add(key_url);
+                    }
+                }
+            }
+            else{
+                ArrayList<String> newArray = new ArrayList<String>();
+                newArray.add(key_url);
+                this.url_n_z.put(value_url,newArray);
+            }
+        }
+    }
+
+    /**
+     * add to word barrel
+     * @param key_url base url
+     * @param value_word word that points to base url
+     */
+    public  void addToWord(String key_url,String value_word){
+        char firstChar = value_word.charAt(0);
+        char upperFirst = Character.toUpperCase(firstChar);
+
+        if(Character.compare(upperFirst, 'N') < 0){
+            if(this.words_a_m.containsKey(value_word)){
+                ArrayList<String> urls = new ArrayList<String>();
+                urls = this.words_a_m.get(value_word);
+                if(!(urls == null)) {
+                    if (!(urls.contains(key_url))) {
+                        this.words_a_m.get(value_word).add(key_url);
+                    }
+                }
+            }
+            else{
+                ArrayList<String> newArray = new ArrayList<String>();
+                newArray.add(key_url);
+                this.words_a_m.put(value_word,newArray);
+            }
+        }
+        else{
+            if(this.words_n_z.containsKey(value_word)){
+                ArrayList<String> urls = new ArrayList<String>();
+                urls = this.words_n_z.get(value_word);
+                if(!(urls == null)) {
+                    if (!(urls.contains(key_url))) {
+                        this.words_n_z.get(value_word).add(key_url);
+                    }
+                }
+            }
+            else{
+                ArrayList<String> newArray = new ArrayList<String>();
+                newArray.add(key_url);
+                this.words_n_z.put(value_word,newArray);
+            }
+        }
+    }
+
+
     public IndexStorageBarrel(int id) throws RemoteException {
         this.id = id;
+    }
+
+    public void writeBarrels(){
+        try{
+            BufferedWriter out = new BufferedWriter(new FileWriter("barrel_out.txt", true));
+
+            // Writing on output stream
+            out.write("==== Info in the words a__ barrel =====\n");
+            for (Entry<String, ArrayList<String>> set : this.words_a_m.entrySet()) {
+                out.write("Palavra *" + set.getKey() +"* associada a\n");
+                for (String x : set.getValue()){
+                    out.write("- " + x + '\n');
+                }
+            }
+
+            out.write("==== Info in the words n_z barrel =====\n");
+            for (Entry<String, ArrayList<String>> set : this.words_n_z.entrySet()) {
+                out.write("Palavra *" + set.getKey() +"* associada a\n");
+                for (String x : set.getValue()){
+                    out.write("- " + x + '\n');
+                }
+            }
+
+            out.write("==== Info in the url a__ barrel =====\n");
+            for (Entry<String, ArrayList<String>> set : this.url_a_m.entrySet()) {
+                out.write("Url *" + set.getKey() +"* contem os seguintes urls\n");
+                for (String x : set.getValue()){
+                    out.write("- " + x + '\n');
+                }
+            }
+
+            out.write("==== Info in the url n_z barrel =====\n");
+            for (Entry<String, ArrayList<String>> set : this.url_n_z.entrySet()) {
+                out.write("Url *" + set.getKey() +"* contem os seguintes urls\n");
+                for (String x : set.getValue()){
+                    out.write("- " + x + '\n');
+                }
+            }
+        }
+        catch (IOException e){
+            System.out.println(e);
+        }
     }
 
     public void run(){
@@ -130,6 +272,9 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                             // Add the url
                             temp.add(url);
                             parentUrls.put(x, temp);
+
+                            addToUrl(url,x);
+
                         }
                         // Update wordsToUrls
                         for(String x : words){
@@ -141,6 +286,9 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                             // Add the url
                             temp.add(url);
                             wordsToUrls.put(x, temp);
+
+                            addToWord(url,x);
+
                         }
 
 
@@ -150,7 +298,8 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
 
                         words = new ArrayList<String>();
                         urls = new ArrayList<String>();
-                        //writeBarrels();
+
+                        writeBarrels();
 
                     }
                     // url

@@ -6,17 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Pesquisa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a-m_barrel.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/n-z_barrel.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Googol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Googol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Search.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SearchResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url_barrel.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/urlsQueue.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsQueue.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/urlsVisited.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsVisited.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/words_barrel.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +57,7 @@
       <recent name="C:\Users\loure\OneDrive\Desktop\uni\SD\Projeto" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Googol">
     <configuration name="Googol" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Googol" />
       <module name="Projeto" />
@@ -82,8 +74,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RMIClient" />
         <item itemvalue="Application.Googol" />
+        <item itemvalue="Application.RMIClient" />
       </list>
     </recent_temporary>
   </component>
@@ -95,6 +87,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1679477246286</updated>
+      <workItem from="1680291518799" duration="626000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1679478144473</created>

@@ -1,3 +1,4 @@
+https://www.uc.pt/bguc/article?key=a-8a9e37d57c
 http://academica.pt/?page_id=65
 https://apps.uc.pt/courses/PT/course/6002
 https://apps.uc.pt/courses/PT/course/8421
@@ -122,7 +123,9 @@ https://www.uc.pt/en/sobrenos
 https://www.uc.pt/governo/#modal-search
 https://www.uc.pt/semanacultural
 https://www.uc.pt/empregabilidade
+https://ucpages.uc.pt/fpce/investigacao/
 https://apps.uc.pt/courses/PT/course/1821
+https://worldheritage.uc.pt:443/pt/labquimico/
 https://www.uc.pt/internacional/estrategia/parcerias
 https://ed.uc.pt/sobre/
 https://www.uc.pt/sustentabilidade/article?key=a-ef9499e3f1
@@ -183,6 +186,7 @@ https://www.uc.pt/bcsuc/noticias/free-trial-jove/
 https://www.uc.pt/en/gduc
 http://www.uc.pt/rualarga/revistas
 https://www.uc.pt/sasuc/apoios/alojamento/student-hub/
+https://ucpages.uc.pt/fpce/investigacao/laboratorios/
 https://worldheritage.uc.pt:443/pt/colegiojesus/
 https://www.uc.pt/sustentabilidade/projetos/m8
 https://www.uc.pt/fcdef/article?key=a-d7effec4b2
@@ -200,6 +204,7 @@ https://www.uc.pt/en/openscience
 https://apps.uc.pt/courses/PT/course/761
 https://www.uc.pt/auc/instituicao/missao
 https://www.uc.pt/ffuc/mobilidade/
+http://www.uc.pt/unesco
 https://www.linkedin.com/signup/cold-join?session_redirect=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2Fschool%2Funiversidade-de-coimbra%2F&trk=organization_guest_main-feed-card_social-actions-reactions
 https://worldheritage.uc.pt:443/pt/atributos/
 https://www.uc.pt/sustentabilidade/article?key=a-e9ff96a899
@@ -303,6 +308,7 @@ https://www.uc.pt/sasuc/apoios/bolsas-de-estudo-e-outros-apoios/
 https://www.uc.pt/sustentabilidade/projetos/ageing
 https://www.uc.pt/sustentabilidade/repository?key=r-1ee1841774
 https://www.linkedin.com/login/pt?session_redirect=https%3A%2F%2Fpt%2Elinkedin%2Ecom%2Fschool%2Funiversidade-de-coimbra%2Fpeople&fromSignIn=true&trk=top-card_top-card-primary-button-top-card-primary-cta
+https://ucpages.uc.pt/fpce/cpsc/
 https://www.uc.pt/sustentabilidade/article?key=a-e29d52fffb
 https://revisaoestatutos.academica.pt
 https://digitalis.uc.pt:443/#offcanvas-nav-primary
@@ -345,6 +351,7 @@ https://www.youtube.com/watch?v=tXsr274qc3o
 https://www.facebook.com/ICNASuc
 https://www.uc.pt/sustentabilidade/publicacoes
 http://www.uc.pt/jardimbotanico
+https://www.uc.pt/fpce/article?key=a-976d5f3f5c
 https://www.uc.pt/iii/investigacao/
 https://www.uc.pt/fctuc/dquimica/
 https://www.edqm.eu/en/
@@ -432,6 +439,7 @@ https://www.uc.pt/fluc/ensino/cursos
 https://www.uc.pt/fcdef/terceirociclo
 https://agenda.uc.pt/
 https://noticias.uc.pt/artigos/dia-mundial-das-cidades-direito-de-cidadania-e-cultura-chega-ao-fim
+https://ucpages.uc.pt/fpce/a-faculdade/corpo-docente/
 https://www.uc.pt/ucbusiness/eventos-e-oportunidades/2-edicao-concurso-de-ideias-de-negocio-sustenta-uc/
 https://apps.uc.pt/courses/PT/course/7801
 https://apps.uc.pt/courses/PT/course/5621
@@ -452,8 +460,10 @@ https://www.uc.pt/protecao-de-dados/
 http://www.museudaciencia.org/index.php?page=2
 https://worldheritage.uc.pt:443/pt/colegiosaojeronimo/
 https://www.uc.pt/research/ciencia-aberta/
+https://apps.fpce.uc.pt/roundcube/
 https://www.uc.pt/en/ucbusiness/
 https://tagv.pt/agenda
+https://www.uc.pt/10unesco/contactos/
 http://www.uc.pt/driic/mobilidade
 https://apps.uc.pt/courses/PT/course/2341
 https://www.linkedin.com/mypreferences/g/guest-cookies
@@ -478,14 +488,17 @@ https://noticias.uc.pt/artigos/ja-sao-conhecidos-os-vencedores-da-4-edicao-dos-p
 https://www.uc.pt/jardimbotanico/noticias/?repos=979363
 https://www.uc.pt/iii/ucspace/eventos-uc-space/iberian-space-science-summer-school-i4s-26-30-junho-2023-em-coimbra/
 https://www.uc.pt/fctuc/noticias/fctuc-promove-curso-sobre-seguranca-em-incendios-florestais/
+https://ucpages.uc.pt/fpce/informatica/proxy
 https://www.uc.pt/fctuc/ensino-e-estudantes/
 https://academica.pt/orgaos/seccoes-culturais/
 https://www.uc.pt/en/jardimbotanico
 https://eleicoes.academica.pt
 https://www.uc.pt/iii/iniciativas-interdisciplinares/
 https://www.uc.pt/governo/senado
+https://www.uc.pt/fpce/article?key=a-b1b5078697
 https://apps.uc.pt/courses/pt/index?designacao=&uno_sigla=&cic_tipo=TERCEIRO&submitform=Pesquisar#courses_list
 http://www.uc.pt/fmuc
+https://www.uc.pt/bguc/selecionar_pesquisa
 https://www.uc.pt/saomarcos/historia
 https://www.linkedin.com/legal/cookie-policy?trk=d_org_guest_school_overview_footer-cookie-policy
 https://www.uc.pt/protecao-de-dados/politica-de-cookies/
@@ -599,6 +612,7 @@ https://www.uc.pt/sobrenos/historia
 https://agenda.uc.pt/calendario
 https://www.linkedin.com/signup/cold-join?session_redirect=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2Fschool%2Funiversidade-de-coimbra%2F&trk=public_biz_promo-join
 https://www.smtuc.pt/#
+https://www.uc.pt/fpce/article?key=a-1f8951c63b
 https://noticias.uc.pt/noticias/artigos/empreendedorismo?repos=285363
 https://www.uc.pt/candidaturas/mestrados-2023-2024/
 https://www.uc.pt/auc/instituicao/historia/#modal-search
@@ -612,10 +626,12 @@ https://noticias.uc.pt/artigos/ja-sao-conhecidos-os-vencedores-da-4-edicao-dos-p
 https://www.uc.pt/en/sobrenos/localizacao_contactos
 https://estudarnauc.uc.pt/#testemunhos-universidade-de-coimbra
 https://agenda.uc.pt/local/sala-2/
+https://www.uc.pt/fpce/article?key=a-44594f4234
 https://www.smtuc.pt/produtos/
 https://www.uc.pt/saomarcos/contactos
 https://www.biocant.pt/
 https://apps.uc.pt/courses/PT/course/9101
+https://ucpages.uc.pt/fpce/estudantes/estruturas-de-alunos/
 https://www.uc.pt/ucbusiness/quem-somos/
 https://www.uc.pt/auc/article?key=a-1f43428eca
 https://apps.uc.pt/courses/PT/course/8281
@@ -642,6 +658,7 @@ https://www.uc.pt/auc/article?key=a-bf6c2f7d32
 https://academica.pt/faq-desporto/
 https://academica.pt/orgaos/nucleos/
 https://www.uc.pt/sustentabilidade/article?key=a-0e4044a9db
+https://www.uc.pt/fpce/#modal-search
 https://www.uc.pt/ffuc/eventos/dia-aberto-na-ffuc/
 https://www.uc.pt/governo/#modal-quickaccess
 https://m.me/BCSUC
@@ -756,6 +773,7 @@ https://www.uc.pt/en/article?key=a-25e76412a2
 https://www.uc.pt/ffuc/fomos-noticia/comemoracao-do-dia-da-faculdade-de-farmacia-da-uc/
 https://worldheritage.uc.pt:443/pt/criterios/
 https://www.linkedin.com/accessibility?trk=d_org_guest_school_overview_footer-accessibility
+https://worldheritage.uc.pt:443/pt/
 https://noticias.uc.pt/artigos/candidaturas?repos=285363
 https://apps.uc.pt/courses/en/index?q=&ou=&type=NAO_CONFERENTE_GRAU
 https://apps.uc.pt/courses/PT/course/441
@@ -772,6 +790,7 @@ https://academica.pt/politica/
 https://www.smtuc.pt/servicos/publicidade-nas-viaturas/
 https://apps.uc.pt/courses/PT/course/7001
 https://noticias.uc.pt/artigos/estao-abertas-as-candidaturas-ao-fundo-de-apoio-social/
+https://ucpages.uc.pt/fpce/a-faculdade/nota-historica/
 https://www.smtuc.pt/servicos/
 https://www.uc.pt/auc/visita
 https://agenda.uc.pt/contactos/
@@ -781,6 +800,7 @@ https://www.uc.pt/colegioartes/Investigacao
 https://noticias.uc.pt/artigos/dia-mundial-das-cidades-direito-de-cidadania-e-cultura-chega-ao-fim/
 http://tagv.bol.pt
 https://prototerapia.lip.pt/
+https://ucpages.uc.pt/fpce/documentos/
 https://academica.pt/faq-acaosocial/
 https://www.uc.pt/icnas/actividades/avaliacao-e-neuro-reabilitacao/
 https://www.smtuc.pt/quem-somos/
@@ -912,6 +932,7 @@ https://www.uc.pt/unica/student
 https://www.uc.pt/auc/outras_pesquisas
 https://worldheritage.uc.pt:443/
 https://www.uc.pt/en/avisolegal
+https://www.uc.pt/fpce/article?key=a-ac345cbde7
 https://www.facebook.com/TeatroAcademicodeGilVicente/
 https://agenda.uc.pt/eventos/lancamento-de-livro-de-henrique-jales-ribeiro/
 https://www.uc.pt/fcdef/article?key=a-6d80ffab87
@@ -929,6 +950,7 @@ https://www.uc.pt/en/cultura
 https://www.uc.pt/saomarcos/#modal-quickaccess
 https://www.facebook.com/UCBusinessGlobal
 https://www.uc.pt/auc/fundos/cadastro_fundos
+https://owncloud.fpce.uc.pt/
 https://apps.uc.pt/courses/PT/course/6301
 https://www.uc.pt/protecao-de-dados/privacidade-e-saude-publica/
 https://apps.uc.pt/courses/PT/course/2181
@@ -943,6 +965,7 @@ https://www.uc.pt/fcdef/article?key=a-51554efa55
 https://www.uc.pt/sustentabilidade/article?key=a-d55c00f88a
 http://www.museudaciencia.org/index.php?module=multilingue&id=1
 https://apps.uc.pt/courses/PT/course/10165
+https://ucpages.uc.pt/fpce/estudantes/oportunidades/
 https://apps.uc.pt/courses/PT/course/3267
 https://apps.uc.pt/courses/PT/course/3263
 https://www.uc.pt/sustentabilidade/#modal-quickaccess
@@ -1022,6 +1045,7 @@ https://www.uc.pt/colegioartes/apres
 https://www.uc.pt/bcsuc/boletim-informativo/boletim-informativo-n-4/
 https://www.smtuc.pt/novidades/linha-n-o-19r-praca-da-republica-s-romao-reforco-da-oferta/
 https://www.smtuc.pt/project-details/hibrido-minibus-mitsubishi-canter-7c15-hev/
+http://uc.pt/unesco
 https://www.portugal.gov.pt/pt/gc21/area-de-governo/cultura
 https://tagv.pt/aluguer-de-espacos
 https://www.uc.pt/ucbusiness/eventos-e-oportunidades/academia-digital-e-de-empreendedorismo-2023-gisu/
@@ -1061,6 +1085,7 @@ https://www.uc.pt/ucbusiness/noticias/programa-de-aceleracao-envelhecimento/
 http://www.uc.pt/anozero/
 https://www.uc.pt/sustentabilidade/article?key=a-8ac23660f2
 https://agenda.uc.pt/#1499290379967-ec83e893-c569
+https://www.uc.pt/10unesco/programa/
 https://www.uc.pt/fcdef/ensino
 https://www.uc.pt/sasuc/localizacao-contactos-e-horarios/
 https://www.facebook.com/pg/NECDEFAAC/about/
@@ -1074,6 +1099,7 @@ https://www.uc.pt/ffuc/fomos-noticia/sessao-solene-do-dia-da-faculdade-de-farmac
 https://apps.uc.pt/courses/PT/course/5981
 https://www.uc.pt/fctuc/deec
 https://www.instagram.com/ucoimbra/
+https://ucpages.uc.pt/fpce/cursos
 https://www.uc.pt/auc/info/horario
 http://www.cm-coimbra.pt/
 https://www.uc.pt/fcdef/repository?key=r-1415944d6b
@@ -1100,6 +1126,7 @@ https://noticias.uc.pt/artigos/eventos?repos=285363
 https://www.uc.pt/openscience
 http://www.tagv.pt/
 https://www.uc.pt/iii/aeuc/areas-estrategicas-em-missao-na-europa/consulta-publica-dos-programas-europeus-de-investigacao-e-inovacao-horizonte/
+https://www.uc.pt/fpce/article?key=a-eda0a03fb7
 https://apps.uc.pt/courses/PT/course/5721
 https://apps.uc.pt/courses/PT/course/3781
 https://agenda.uc.pt/local/anfiteatro-da-subunidade-3-polo-3/
@@ -1263,6 +1290,7 @@ https://apps.uc.pt/courses/PT/course/2621
 https://www.uc.pt/ffuc/eventos/semana-da-biomedica/
 https://academica.pt/festas-academicas/festa-das-latas/
 https://www.uc.pt/ffuc/investigacao/
+https://www.uc.pt/fpce/repository?key=r-e77eb12084
 https://www.uc.pt/colegioartes/apres/estat
 https://www.uc.pt/icnas/noticias/cientistas-da-uc-estao-a-estudar-potenciais-impactos-da-dieta-pre-natal-em-doencas-do-neurodesenvolvimento/
 https://noticias.uc.pt/artigos/universidade-de-coimbra-junta-1-3-toneladas-de-equipamentos-eletricos-para-reciclagem
@@ -1285,6 +1313,7 @@ https://apps.uc.pt/courses/PT/course/1761
 https://apps.uc.pt/courses/PT/course/10721
 https://www.uc.pt/fctuc/dem/
 https://www.linkedin.com/redir/redirect?url=https%3A%2F%2Fnoticias%2Euc%2Ept%2Fartigos%2Funiversidade-de-verao-esta-de-volta-de-23-a-28-de-julho-inscricoes-estao-abertas%2F&urlhash=LMcv&trk=organization_guest_main-feed-card_feed-article-content
+https://ucpages.uc.pt/fpce/cursos/formacao-nao-graduada/
 http://capc.com.pt/site/index.php/pt/
 https://www.uc.pt/en/candidatos
 https://www.smtuc.pt/project-details/mercedes-benz-o405-3/
