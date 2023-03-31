@@ -124,7 +124,7 @@ public class Downloader implements Runnable{
                                 socket.send(packet);
                                 wordsToSend = "";
                             }
-                            wordsToSend += "word" + counter + ";" + s + "|";
+                            wordsToSend += "word" + counter + ";" + s.toLowerCase() + "|";
                             counter++;
                         }
                         packet = new DatagramPacket(wordsToSend.getBytes(), wordsToSend.getBytes().length, group, PORT);
@@ -146,7 +146,7 @@ public class Downloader implements Runnable{
                         // Adicionar o url a lista dos visitados
                         urlsVisited.add(url);
 
-                        SearchResult sr = new SearchResult(url, title, citation, null, null);
+                        SearchResult sr = new SearchResult(url, title, citation);
                         System.out.println("Downloader " + id + ": " + url);
 
                     } catch (java.lang.IllegalArgumentException e) {

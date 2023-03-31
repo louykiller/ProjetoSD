@@ -59,8 +59,11 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
                             if (results == null)
                                 System.out.println("No results found!");
                             else {
+                                int i = 0;
                                 for (SearchResult rp : results) {
-                                    System.out.println(rp.toString());
+                                    if(i++ == 10)
+                                        break;
+                                    System.out.println(rp.toString() + "\n");
                                 }
                             }
                         }
@@ -121,6 +124,7 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
             }
         } catch (Exception e) {
             System.out.println("Server offline. Try again later");
+            e.printStackTrace();
             exit(1);
         }
     }
