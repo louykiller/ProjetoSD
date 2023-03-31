@@ -11,10 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class RMISearchModule extends UnicastRemoteObject implements ServerActions, Runnable {
     private final List<String> urlsQueue;
@@ -77,12 +74,20 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         return newUser;
     }
     private int barrelIndex;
-    public ArrayList<ArrayList<SearchResult>> search(String searchWords) throws RemoteException{
-        ArrayList<ArrayList<SearchResult>> results = null;
+    private final HashMap<String, Integer> searches = new HashMap<>();
+
+    public ArrayList<SearchResult> search(String searchWords) throws RemoteException{
+        ArrayList<SearchResult> results = null;
         while(results == null) {
             try {
                 Search srch = (Search) LocateRegistry.getRegistry(8000 + barrelIndex).lookup("search");
                 results = srch.search(searchWords);
+                for(String s : searchWords.toLowerCase().split(" ")){
+                    if(searches.containsKey(s))
+                        searches.put(s, searches.get(s) + 1);
+                    else
+                        searches.put(s, 1);
+                }
             } catch (NotBoundException e) {
                 System.out.println("Couldn't get info from barrel " + barrelIndex);
             }
@@ -91,10 +96,10 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
                 barrelIndex = 0;
             }
         }
+
         return results;
     }
     public HashMap<String, SystemElements> elements = new HashMap<>();
-    public ArrayList<String> topSearches = new ArrayList<>();
 
     public void updateDownloaderStatus(boolean active, int id, int port) throws java.rmi.RemoteException {
         // Insert / Update the downloaderElement
@@ -104,10 +109,7 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
         // Insert / Update the barrelElement
         elements.put("B" + id, new BarrelElement(id, port, active));
     }
-    public void updateTopSearches(ArrayList<String> topSearches) throws java.rmi.RemoteException {
-        // Update the top searches
-        this.topSearches = topSearches;
-    }
+
     public void printSystemDetails() throws java.rmi.RemoteException{
         try {
             // Gets the registry for the client print
@@ -119,9 +121,13 @@ public class RMISearchModule extends UnicastRemoteObject implements ServerAction
             }
             // Top 10 Searches
             cp.print("\nTop 10 pesquisas:");
-            for(String s : topSearches){
+            int count = 0;
+            for(String s : searches.keySet()){
+                if(count++ == 10)
+                    break;
                 cp.print("- " + s);
             }
+
         } catch (NotBoundException e) {
             throw new RuntimeException(e);
         }

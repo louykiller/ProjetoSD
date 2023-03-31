@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2ac6364e-ced8-4860-ae8a-2dac48e81d69" name="Changes" comment="Samll fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Downloader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexStorageBarrel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexStorageBarrel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RMIClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMIClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RMISearchModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RMISearchModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Search.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerActions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/urlsQueue.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsQueue.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/urlsVisited.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlsVisited.txt" afterDir="false" />
     </list>
@@ -40,18 +46,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/loure/Downloads/jsoup-1.15.4.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/loure/Downloads/jsoup-1.15.4.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\loure\OneDrive\Desktop\uni\SD\Projeto" />
@@ -74,8 +80,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RMIClient" />
         <item itemvalue="Application.Googol" />
+        <item itemvalue="Application.RMIClient" />
       </list>
     </recent_temporary>
   </component>

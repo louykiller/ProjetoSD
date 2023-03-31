@@ -61,7 +61,7 @@ public class Downloader implements Runnable{
                     }
                     // Se ja foi visitado
                     if(urlsVisited.contains(url)){
-                        System.out.println("Downloader " + id + ": URL já visitado! " + url);
+                        //System.out.println("Downloader " + id + ": URL já visitado! " + url);
                         String header = "url;" + url + "|title;null|citation;null";
                         DatagramPacket packet = new DatagramPacket(header.getBytes(), header.getBytes().length, group, PORT);
                         socket.send(packet);
@@ -146,8 +146,8 @@ public class Downloader implements Runnable{
                         // Adicionar o url a lista dos visitados
                         urlsVisited.add(url);
 
-                        SearchResult sr = new SearchResult(url, title, citation);
-                        System.out.println("Downloader " + id + ": " + url);
+                        //SearchResult sr = new SearchResult(url, title, citation, null, null);
+                        //System.out.println("Downloader " + id + ": " + url);
 
                     } catch (java.lang.IllegalArgumentException e) {
                         System.out.println("Malformed URL: " + url);

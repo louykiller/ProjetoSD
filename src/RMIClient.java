@@ -55,13 +55,54 @@ public class RMIClient extends UnicastRemoteObject implements ClientPrint {
                             System.out.print("Googol Search:\n");
                             String searchWords = sc.nextLine();
                             // Get the results for the search words
-                            ArrayList<ArrayList<SearchResult>> results = ca.search(searchWords);
-                            if (results == null)
+                            ArrayList<SearchResult> results = ca.search(searchWords);
+                            if (results.size() == 0)
                                 System.out.println("No results found!");
                             else {
-                                for(ArrayList ls : results) {
-                                    for (Object rp : ls) {
-                                        System.out.println(rp.toString());
+                                System.out.println(results.size() + " results");
+                                int index = 0;
+                                loop: while (true){
+
+                                    for(int i = index; i < index + 10 && i < results.size(); i++){
+                                        System.out.println(results.get(i) + "\n");
+                                        if(user != null){
+                                            System.out.println("Relevance: " + results.get(i).parentUrls.size());
+                                            for(String u : results.get(i).parentUrls){
+                                                System.out.println(u);
+                                            }
+                                            System.out.println();
+                                        }
+                                    }
+                                    int m = Math.min(index + 10, results.size());
+                                    System.out.println("=======================================");
+                                    System.out.println("Showing results " + index + " to " + m + " out of " + results.size());
+                                    System.out.println("=======================================");
+
+                                    System.out.println("1 - Next Page; 2 - Previous Page; 0 - Exit;");
+                                    int in = Integer.parseInt(sc.nextLine());
+                                    switch (in){
+                                        case 0 -> {
+                                            break loop;
+                                        }
+                                        case 1 -> {
+                                            if(index + 10 < results.size()){
+                                                index += 10;
+                                            }
+                                            else {
+                                                System.out.println("No next page");
+                                            }
+                                        }
+                                        case 2 -> {
+                                            if(index - 10 > 0){
+                                                index -= 10;
+                                            }
+                                            else {
+                                                System.out.println("No previous page");
+                                            }
+                                        }
+                                        default -> {
+                                            System.out.println("Wrong option");
+                                        }
                                     }
                                 }
                             }
