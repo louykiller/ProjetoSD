@@ -277,6 +277,25 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
         }
     }
 
+    public ArrayList<String> searchUrl(String url){
+        if(this.url_a_m.containsKey(url)){
+            return this.url_a_m.get(url);
+        }
+        else if(this.url_n_z.containsKey(url)){
+            return this.url_n_z.get(url);
+        }
+        return null;
+    }
+
+    public ArrayList<String> searchWord(String word){
+        if(this.words_a_m.containsKey(word)){
+            return this.words_a_m.get(word);
+        }
+        else if(this.words_n_z.containsKey(word)){
+            return this.words_n_z.get(word);
+        }
+        return null;
+    }
     public void writeBarrels(){
         try{
             BufferedWriter out = new BufferedWriter(new FileWriter("barrel_out.txt", true));
