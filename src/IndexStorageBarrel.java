@@ -104,6 +104,15 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                 urls = this.url_a_m.get(value_url);
                 if(!(urls == null)) {
                     if (!(urls.contains(key_url))) {
+                        if(this.url_a_m.size() > 150){
+                            String aux = value_url;
+                            ArrayList<String> aux_array = this.url_a_m.get(value_url);;
+
+                            this.url_a_m.clear();
+                            this.url_a_m = new HashMap<>();
+
+                            this.url_a_m.put(aux,aux_array);
+                        }
                         this.url_a_m.get(value_url).add(key_url);
                     }
                 }
@@ -121,6 +130,15 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                 urls = this.url_n_z.get(value_url);
                 if(!(urls == null)){
                     if(!(urls.contains(key_url))){
+                        if(this.url_n_z.size() > 150){
+                            String aux = value_url;
+                            ArrayList<String> aux_array = this.url_n_z.get(value_url);;
+
+                            this.url_n_z.clear();
+                            this.url_n_z = new HashMap<>();
+
+                            this.url_n_z.put(aux,aux_array);
+                        }
                         this.url_n_z.get(value_url).add(key_url);
                     }
                 }
@@ -151,6 +169,15 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                 urls = this.words_a_m.get(value_word);
                 if(!(urls == null)) {
                     if (!(urls.contains(key_url))) {
+                        if(this.words_a_m.size() > 150){
+                            String aux = value_word;
+                            ArrayList<String> aux_array = this.words_a_m.get(value_word);;
+
+                            this.words_a_m.clear();
+                            this.words_a_m = new HashMap<>();
+
+                            this.words_a_m.put(aux,aux_array);
+                        }
                         this.words_a_m.get(value_word).add(key_url);
                     }
                 }
@@ -168,6 +195,15 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                 urls = this.words_n_z.get(value_word);
                 if(!(urls == null)) {
                     if (!(urls.contains(key_url))) {
+                        if(this.words_n_z.size() > 150){
+                            String aux = value_word;
+                            ArrayList<String> aux_array = this.words_n_z.get(value_word);;
+
+                            this.words_n_z.clear();
+                            this.words_n_z = new HashMap<>();
+
+                            this.words_n_z.put(aux,aux_array);
+                        }
                         this.words_n_z.get(value_word).add(key_url);
                     }
                 }
@@ -297,7 +333,6 @@ public class IndexStorageBarrel extends UnicastRemoteObject implements Search, R
                             parentUrls.put(x, temp);
                             //add to specific barrel
                             addToUrl(url,x);
-
                         }
                         // Update wordsToUrls
                         for(String x : words){
